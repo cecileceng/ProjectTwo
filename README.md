@@ -40,6 +40,7 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 6. This is a big project, prepare to do a lot of googling and asking the TA's for help.
 7. Check GitHub and Slack daily for team updates! 5 minutes of looking can save you from spending 5 hours working on a feature someone else has already built.
 8. Communicate! Communication is key.
+
 #####Here's a quick list of the most common GitHub commands you'll be using:
 1. git pull 	(detailed: git pull sourceName branchName)
 2. git status 	(Check this before pushing and pulling)
