@@ -1,8 +1,9 @@
 # CODR! The Grindr for Devs.
-Let's keep our code organized! Use this README as a public billboard.
+Anyone can edit! Let's keep our code organized! Use this README as a public billboard.
 
 ## ANNOUNCEMENTS AND WARNINGS:
 List bugs and important stuff here.
+
 READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
 ##README STRUCTURE
