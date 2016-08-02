@@ -56,4 +56,5 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
 ##NOTES
 
-?????
+Feel free to make suggestions for improvement.
+If you're not familiar with GitHub workflow, I'll give you a GitHub mentoring session. It's essential than all of us can work effectively over GitHub.
