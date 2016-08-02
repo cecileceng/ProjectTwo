@@ -11,7 +11,9 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 2. README index
 3. Requirements
 4. Workflow
-5. Notes
+5. Presentation
+6. Notes
+
 
 ##REQUIREMENTS (when completed: list date completed and your name.)
 1. Must use Node.js and Express.js for web server. (not yet done)
@@ -53,6 +55,24 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 8. git checkout branchName 	(switch from current branch to branchName)
 9. git branch 		(view branches)
 10. git merge branchName 	(merge branchName INTO current branch)
+
+##PRESENTATION
+
+#####Our presentation time is 10 minutes. This is a formal presentation. We will need to explain the following in detail: 
+1. Overall concept
+2. Motivation for development
+3. Design process
+4. Technologies used
+5. Demonstrate the applications functionality
+6. Explain direction for future development
+
+#####We will be graded on:
+1. Concept
+2. Design
+3. Functionality
+4. Collaboration
+5. Presentation 
+6. Technical sophistication??? (wasn't listed in the slideshow, but we were graded on it during the first project)
 
 ##NOTES
 
