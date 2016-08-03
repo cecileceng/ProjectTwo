@@ -78,3 +78,6 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
 Feel free to make suggestions for improvement.
 If you're not familiar with GitHub workflow, I'll give you a GitHub mentoring session. It's essential than all of us can work effectively over GitHub.
+
+Use GitHub "Issues" feature to track issues with code.
+Socket.io or websockets for live chat communication between users.
