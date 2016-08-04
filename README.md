@@ -1,7 +1,3 @@
-![HamburgerClosed](https://raw.githubusercontent.com/cecileceng/ProjectTwo/master/Loading%20page.PNG)![HamburgerOpen](https://raw.githubusercontent.com/cecileceng/ProjectTwo/master/Hamburger%20Open.PNG)
-
-
-
 # CODR! The Grindr for Devs.
 Anyone can edit! Let's keep our code organized! Use this README as a public billboard.
 
