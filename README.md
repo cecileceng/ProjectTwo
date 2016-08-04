@@ -90,18 +90,20 @@ Finishing touches
 1. git status 	(Check this before pushing and pulling)
 2. git add -A 	(Stage all files for commit. You can also specify individual files)
 3. git commit -m 	(commit early, commit often)
-At this point you should have committed all your changes
+- At this point you should have committed all your changes
 4. git remote -v 	(view remote connections)
 5. git branch 		(view branches)
---optional--
+- Optional -
 5a. git checkout -b branchName 	(create branch named branchName and switches to it)
 5b. git checkout branchName 	(switch from current branch to branchName)
--------------
+- fin -
 6. git pull 	(detailed: git pull sourceName branchName) git pull origin branchName
-At this point your local machine should be up to date
+- At this point your local machine should be up to date
+-Optional -
+git branch -d branchName 	(Deletes your previous working branch if you wanted to start fresh)
 7. git merge branchName 	(merge branchName INTO current branch)
 8. git push sourceName branchName (specify your endpoints so you don't accidentally push to the wrong branch)
-No one should push to master please!
+- No one should push to master please!
 
 ##PRESENTATION
 
