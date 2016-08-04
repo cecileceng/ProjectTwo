@@ -83,15 +83,18 @@ Finishing touches
 
 
 #####Here's a quick list of the most common GitHub commands you'll be using:
-1. git pull 	(detailed: git pull sourceName branchName)
+1. git remote -v 	(view remote connections)
+2. git branch 		(view branches)
+3. git pull 	(detailed: git pull sourceName branchName) git pull origin branchName
+
 2. git status 	(Check this before pushing and pulling)
 3. git add -A 	(Stage all files for commit. You can also specify individual files)
 4. git commit -m 	(commit early, commit often)
 5. git push sourceName branchName (specify your endpoints so you don't accidentally push to the wrong branch)
-6. git remote -v 	(view remote connections)
+
 7. git checkout -b branchName 	(create branch named branchName and switches to it)
 8. git checkout branchName 	(switch from current branch to branchName)
-9. git branch 		(view branches)
+
 10. git merge branchName 	(merge branchName INTO current branch)
 
 ##PRESENTATION
