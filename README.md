@@ -44,6 +44,44 @@ READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 7. Check GitHub and Slack daily for team updates! 5 minutes of looking can save you from spending 5 hours working on a feature someone else has already built.
 8. Communicate! Communication is key.
 
+##Milestones:
+
+Wednesday 8/3
+- Files setup
+- Server working
+
+Saturday 8/6
+Status Meeting (remote ok)
+What have you done
+What are you still working on
+Where are you stuck
+
+Sunday 8/7
+Group Meeting 6:00?
+Do all the pieces work together
+
+Monday 8/8 
+Status meeting at start of class
+Backend complete
+
+Tuesday 8/9
+Middleware complete
+Work on your own or meetup, but it’s not mandatory
+
+Wednesday 8/10
+Frontend complete
+Status meeting at start of class
+
+Thursday 8/11
+Debug
+Finishing touches
+
+Friday 8/12
+Group Meeting 6:30
+Go over presentation
+Finishing touches
+
+
 #####Here's a quick list of the most common GitHub commands you'll be using:
 1. git pull 	(detailed: git pull sourceName branchName)
 2. git status 	(Check this before pushing and pulling)
