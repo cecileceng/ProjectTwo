@@ -1,10 +1,10 @@
-# CODR! The Grindr for Devs.
-Anyone can edit! Let's keep our code organized! Use this README as a public billboard.
+# GIT some! Coding Buddies near you.
+##(the Grindr for devs)
+Keep our code organized! Use this README as a public billboard.
 
 ## ANNOUNCEMENTS AND WARNINGS:
 List bugs and important stuff here.
-
-READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
+SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL FRESH.
 
 ##README STRUCTURE
 1. Announcements
