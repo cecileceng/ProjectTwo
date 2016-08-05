@@ -16,7 +16,7 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 
 
 ##REQUIREMENTS (when completed: list date completed and your name.)
-1. Must use Node.js and Express.js for web server. (not yet done)
+1. Must use Node.js and Express.js for web server. (DONE. Michael: 8-5-2016)
 2. Must be backed with MYSQL Database using Sequelize ORM (not yet done)
 3. Must have both GET and POST routes (not yet done)
 4. Basic SEO (not yet done)
@@ -24,7 +24,7 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 6. Must deploy on Heroku (not yet done)
 7. Must utilize new library (not yet done)
 8. Must have polished UI (not yet done)
-9. Must have MVC folder structure (not yet done)
+9. Must have MVC folder structure (DONE. Michael: 8-5-2016)
 10. Must meet good quality coding standards (Maybe done??)
 11. OPTIONAL : Utilize handlebars.js templating engine (not yet done)
 12. OPTIONAL : Incorporate Authentication (not yet done)
