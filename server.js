@@ -3,7 +3,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
-<<<<<<< HEAD
+
 var exphbs = require('express-handlebars');
 var sequelize = require('sequelize');
 
@@ -11,11 +11,11 @@ var models = require('./models');
 
 
 const keys = require('./tokens.js');
-=======
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 //const keys = require('./tokens.js');
->>>>>>> 698b913ccc10ad8b507da7ce73c46ba926cc71f6
+
 
 //OAUTH2
 /*
