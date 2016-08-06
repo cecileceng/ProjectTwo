@@ -29,3 +29,5 @@ var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 //listen on port, if undefined, use 3000
 app.listen(process.env.PORT || 3000);
+
+//app.get('/users/create', function
