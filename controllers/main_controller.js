@@ -3,7 +3,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const router = express.Router();
-//const burger = require('../models/burger.js')
+const models = require('../models/users.js')
 
 //redirect to home route by default
 router.get('/', function(req, res) {
@@ -32,7 +32,19 @@ router.post('/burgers/create', function(req, res) {
         res.redirect('/burgers');
     })
 })
-
+*/
+router.post('/users/create', function(req, res){
+    models.users.create({name:req.body.name,
+                            email:req.body.email,
+                            githubID:req.body.githubID,
+                            languages:req.body.languages,
+                            rating:req.body.rating,
+                            userName:req.body.userName,
+                            password:req.body.password}).then (function(){
+                                res.redirect('/home');
+                            });
+});
+/*
 //update route
 router.put('/burgers/update/devour/:id', function(req, res) {
     //tableName, column, ID, callback
@@ -41,6 +53,11 @@ router.put('/burgers/update/devour/:id', function(req, res) {
         res.redirect('/burgers');
     })
 })
+*/
+
+
+/*
+
 //delete method available because method override
 router.delete('/burgers/delete/:id', function(req, res) {
     //run burger.js logic of deleteOne(table,id,callback)

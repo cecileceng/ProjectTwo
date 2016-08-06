@@ -3,6 +3,12 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
+var exphbs = require('express-handlebars');
+var sequelize = require('sequelize');
+
+var models = require('./models');
+
+
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
@@ -12,8 +18,6 @@ app.use(bodyParser.urlencoded({
 }));
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'));
-//require handlebars
-var exphbs = require('express-handlebars');
 //use handlebars engine as template engine, use 'main' as our base file
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main'
