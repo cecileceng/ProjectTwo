@@ -6,16 +6,11 @@ $('.button-collapse').sideNav({
 }
 );
 // Show sideNav
-$('.button-collapse').sideNav('show');
-// Hide sideNav
-$('.button-collapse').sideNav('hide');
-
-// Sidenav Menu
 $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 240
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }
   );
-  $('.collapsible').collapsible
+  $('.collapsible').collapsible();
   //End Sidenav Menu
 
