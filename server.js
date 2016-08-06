@@ -3,6 +3,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
+<<<<<<< HEAD
 var exphbs = require('express-handlebars');
 var sequelize = require('sequelize');
 
@@ -10,8 +11,14 @@ var models = require('./models');
 
 
 const keys = require('./tokens.js');
+=======
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+//const keys = require('./tokens.js');
+>>>>>>> 698b913ccc10ad8b507da7ce73c46ba926cc71f6
 
 //OAUTH2
+/*
 var oauth2 = require('simple-oauth2')({
 	clientID: CLIENT_ID,
 	clientSecret: CLIENT_SECRET,
@@ -50,6 +57,7 @@ app.get('/callback', function (req, res) {
 app.get('/', function (req, res) {
 	res.send('Hello<br><a href="/auth">Log in with Github</a>');
 });
+*/
 
 //Nothing new added below
 
@@ -70,7 +78,21 @@ app.set('view engine', 'handlebars');
 //link to main controller, set as default page"/"
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
+
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
+
 //listen on port, if undefined, use 3000
+<<<<<<< HEAD
 app.listen(process.env.PORT || 3000);
 
 //app.get('/users/create', function
+=======
+http.listen(process.env.PORT || 3000,function(){
+	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
+});
+
+>>>>>>> 698b913ccc10ad8b507da7ce73c46ba926cc71f6
