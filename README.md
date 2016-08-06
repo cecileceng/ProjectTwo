@@ -1,10 +1,14 @@
-# GIT some! Coding Buddies near you.
-##(the Grindr for devs)
-Keep our code organized! Use this README as a public billboard.
+# CODR! The Grindr for Devs.
+Anyone can edit! Let's keep our code organized! Use this README as a public billboard.<br>
+Heroku app URL: [coding-partners.herokuapp.com](https://www.coding-partners.herokuapp.com)<br>
+Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
 ## ANNOUNCEMENTS AND WARNINGS:
-List bugs and important stuff here.
-SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL FRESH.
+Heroku App remote: https://git.heroku.com/coding-partners.git<br>
+Verify remotes in git:  git remote -v<br>
+Add Heroku remote:  heroku git:remote -a coding-partners<br>
+
+READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
 ##README STRUCTURE
 1. Announcements
@@ -16,7 +20,7 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 
 
 ##REQUIREMENTS (when completed: list date completed and your name.)
-1. Must use Node.js and Express.js for web server. (DONE. Michael: 8-5-2016)
+1. Must use Node.js and Express.js for web server. (not yet done)
 2. Must be backed with MYSQL Database using Sequelize ORM (not yet done)
 3. Must have both GET and POST routes (not yet done)
 4. Basic SEO (not yet done)
@@ -24,7 +28,7 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 6. Must deploy on Heroku (not yet done)
 7. Must utilize new library (not yet done)
 8. Must have polished UI (not yet done)
-9. Must have MVC folder structure (DONE. Michael: 8-5-2016)
+9. Must have MVC folder structure (not yet done)
 10. Must meet good quality coding standards (Maybe done??)
 11. OPTIONAL : Utilize handlebars.js templating engine (not yet done)
 12. OPTIONAL : Incorporate Authentication (not yet done)
@@ -45,21 +49,16 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 8. Communicate! Communication is key.
 
 #####Here's a quick list of the most common GitHub commands you'll be using:
-1. git status 	(Check this before pushing and pulling)
-2. git add -A 	(Stage all files for commit. You can also specify individual files)
-3. git commit -m 	(commit early, commit often)
-- At this point you should have committed all your changes
-4. git remote -v 	(view remote connections)
-5. git branch 		(view branches)
-..*- Optional - 5a. git checkout -b branchName 	(create branch named branchName and switches to it)
-..*- Optional - 5b. git checkout branchName 	(switch from current branch to branchName)
-6. git pull 	(detailed: git pull sourceName branchName) git pull origin branchName
-- At this point your local machine should be up to date
-..*-Optional - git branch -d branchName 	(Deletes your previous working branch if you wanted to start fresh)
-7. git merge branchName 	(merge branchName INTO current branch)
-8. git push sourceName branchName (specify your endpoints so you don't accidentally push to the wrong branch)
-- No one should push to master please!
-
+1. git pull 	(detailed: git pull sourceName branchName)
+2. git status 	(Check this before pushing and pulling)
+3. git add -A 	(Stage all files for commit. You can also specify individual files)
+4. git commit -m 	(commit early, commit often)
+5. git push sourceName branchName (specify your endpoints so you don't accidentally push to the wrong branch)
+6. git remote -v 	(view remote connections)
+7. git checkout -b branchName 	(create branch named branchName and switches to it)
+8. git checkout branchName 	(switch from current branch to branchName)
+9. git branch 		(view branches)
+10. git merge branchName 	(merge branchName INTO current branch)
 
 ##PRESENTATION
 
