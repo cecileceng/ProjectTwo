@@ -60,6 +60,10 @@ app.get('/', function (req, res) {
 */
 
 //Nothing new added below
+<<<<<<< HEAD
+=======
+
+>>>>>>> testing
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
