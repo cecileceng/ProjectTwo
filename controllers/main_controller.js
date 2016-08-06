@@ -3,13 +3,16 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const burger = require('../models/burger.js')
+//const burger = require('../models/burger.js')
 
 //redirect to home route by default
 router.get('/', function(req, res) {
     res.redirect('/home');
 });
 
+router.get('/home', function(req, res) {
+    res.render('index');
+});
 
 /*COMMENTED OUT THIS CODE FOR GITSOME
 
