@@ -1,6 +1,5 @@
 console.log("interactive is linked and ready");
-//Materialize init hack to load menu only after materialize has loaded from CDN
-(function($){
+window.onload = (function($){
   $(function(){
 
     $('.button-collapse').sideNav({
