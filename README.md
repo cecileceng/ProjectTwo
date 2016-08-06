@@ -4,7 +4,7 @@ Heroku app URL: [coding-partners.herokuapp.com](https://www.coding-partners.hero
 Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
 ## ANNOUNCEMENTS AND WARNINGS:
-Heroku App: https://git.heroku.com/coding-partners.git<br>
+Heroku App remote: https://git.heroku.com/coding-partners.git<br>
 Verify remotes in git:  git remote -v<br>
 Add Heroku remote:  heroku git:remote -a coding-partners<br>
 
