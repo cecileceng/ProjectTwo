@@ -33,8 +33,12 @@ router.post('/burgers/create', function(req, res) {
     })
 })
 */
+router.get('/users/create', function(req, res){
+    res.render('users/new_users');
+});
+
 router.post('/users/create', function(req, res){
-    models.users.create({name:req.body.name,
+    models.Users.create({name:req.body.name,
                             email:req.body.email,
                             githubID:req.body.githubID,
                             languages:req.body.languages,
@@ -54,7 +58,7 @@ router.put('/burgers/update/devour/:id', function(req, res) {
     })
 })
 */
-
+//router.put()
 
 /*
 
