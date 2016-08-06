@@ -1,12 +1,12 @@
 # CODR! The Grindr for Devs.
-Anyone can edit! Let's keep our code organized! Use this README as a public billboard.
-Heroku app URL: [coding-partners.herokuapp.com](https://www.coding-partners.herokuapp.com)
-Webpage URL: [coding.partners](https://www.coding.partners)
+Anyone can edit! Let's keep our code organized! Use this README as a public billboard.<br>
+Heroku app URL: [coding-partners.herokuapp.com](https://www.coding-partners.herokuapp.com)<br>
+Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
 ## ANNOUNCEMENTS AND WARNINGS:
-Heroku App: https://git.heroku.com/coding-partners.git
-Verify remotes in git:  git remote -v
-Add Heroku remote:  heroku git:remote -a coding-partners
+Heroku App: https://git.heroku.com/coding-partners.git<br>
+Verify remotes in git:  git remote -v<br>
+Add Heroku remote:  heroku git:remote -a coding-partners<br>
 
 READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
