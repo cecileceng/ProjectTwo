@@ -1,6 +1,6 @@
 # CODR! The Grindr for Devs.
 Anyone can edit! Let's keep our code organized! Use this README as a public billboard.<br>
-Heroku app URL: [coding-partners.herokuapp.com](https://www.coding-partners.herokuapp.com)<br>
+Heroku app URL: [coding-partners.herokuapp.com](http://www.coding-partners.herokuapp.com)<br>
 Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
 ## ANNOUNCEMENTS AND WARNINGS:
