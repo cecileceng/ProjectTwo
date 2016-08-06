@@ -8,8 +8,8 @@ Heroku App remote: https://git.heroku.com/coding-partners.git<br>
 Verify remotes in git:  git remote -v<br>
 Add Heroku remote:  heroku git:remote -a coding-partners<br>
 :information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
-Push non-master brancch to Heroku remote for live testing: git push heroku-dev <your git branch name>:master<br>
-Github HTML preview, just insert the index.html into this page: [https://htmlpreview.github.io/](https://htmlpreview.github.io/)<br>
+:information_desk_person:Push non-master branch to Heroku remote for live testing: git push heroku-dev <your git branch name>:master<br>
+:information_desk_person:Github HTML preview, just insert the index.html into this page: [https://htmlpreview.github.io/](https://htmlpreview.github.io/)<br>
 
 READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
