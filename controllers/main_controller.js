@@ -34,7 +34,7 @@ router.post('/burgers/create', function(req, res) {
 })
 */
 router.get('/users/create', function(req, res){
-    res.render('users/new_users');
+    res.render('new_users');
 });
 
 router.post('/users/create', function(req, res){
