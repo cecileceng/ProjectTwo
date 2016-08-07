@@ -60,10 +60,6 @@ app.get('/', function (req, res) {
 */
 
 //Nothing new added below
-<<<<<<< HEAD
-=======
-
->>>>>>> testing
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
@@ -90,13 +86,8 @@ io.on('connection', function(socket){
 });
 
 //listen on port, if undefined, use 3000
-<<<<<<< HEAD
-app.listen(process.env.PORT || 3000);
 
-//app.get('/users/create', function
-=======
 http.listen(process.env.PORT || 3000,function(){
 	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
 });
 
->>>>>>> 698b913ccc10ad8b507da7ce73c46ba926cc71f6
