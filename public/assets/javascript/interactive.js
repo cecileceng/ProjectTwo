@@ -1,7 +1,9 @@
-console.log("interactive is linked and ready");
-
 $(document).ready(function(){
+  console.log("interactive is linked and ready");
+
  // Initialize collapse button
+
+ /* TEMPORARY HIDE BUTTON. sideNAV is not a function!
   $(".button-collapse").sideNav({
       menuWidth: 300, // Default is 240
       edge: 'left', // Choose the horizontal origin
@@ -9,7 +11,9 @@ $(document).ready(function(){
     });
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   $('.collapsible').collapsible();
-});
+  */
+
+});//end document.ready
 
 
 /*
