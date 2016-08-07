@@ -1,5 +1,6 @@
 <header class="text-center">
 </header>
+<div class="main_container">
 <nav>
   <div class="nav-wrapper">
     <a href="#" class="brand-logo center"><h1>code.partners near you</h1></a>
@@ -30,20 +31,24 @@
   </div>
 </nav>
 <main>
-<div class="container text-center main_container">
-<div id="map_container">
-	<div id="map"></div>
-</div>
-<p>Lorem ipsum Blah Blah Blah!</p>
-</div>
-<div id="message_box">
-<ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-</div>
+{{!-- <div class="container text-center"> --}}
+  <div id="map_container">
+  	<div id="map"></div>
+      <div id="message_box">
+      <ul id="messages"></ul>
+        <div id="messageInputBox">
+          <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Lorem ipsum Blah Blah Blah!</p>
+{{!-- </div> --}}
 
 </main>
+</div>{{!-- end main_container --}}
 <footer>
 </footer>
 
