@@ -3,8 +3,7 @@
 Keep our code organized! Use this README as a public billboard.
 
 ## ANNOUNCEMENTS AND WARNINGS:
-List bugs and important stuff here.
-SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL FRESH.
+BRANCHES SYNCED! Views folder needs overhaul. Commented out sidenav in interactive.js. Still lots of work to do.
 
 ##README STRUCTURE
 1. Announcements
@@ -21,12 +20,12 @@ SERVER.JS, MAIN CONTROLLER.JS, AND HANDLEBARS WORKING ON BRANCH FRONTEND. PULL F
 3. Must have both GET and POST routes (not yet done)
 4. Basic SEO (not yet done)
 5. Basic Framework Testing (not yet done)
-6. Must deploy on Heroku (not yet done)
-7. Must utilize new library (not yet done)
-8. Must have polished UI (not yet done)
+6. Must deploy on Heroku (in progress, not yet complete)
+7. Must utilize new library (DONE. Michael: 8-7-2016 with sockets.io)
+8. Must have polished UI (IN PROGRESS. Lee: current)
 9. Must have MVC folder structure (DONE. Michael: 8-5-2016)
 10. Must meet good quality coding standards (Maybe done??)
-11. OPTIONAL : Utilize handlebars.js templating engine (not yet done)
+11. OPTIONAL : Utilize handlebars.js templating engine (DONE. ALL: 8-7-2016)
 12. OPTIONAL : Incorporate Authentication (not yet done)
 13. OPTIONAL : Use existing data set to power database (not yet done) 
 14. OPTIONAL :  Create migration strategy (not yet done)
