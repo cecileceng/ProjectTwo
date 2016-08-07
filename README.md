@@ -1,13 +1,21 @@
 # CODR! The Grindr for Devs.
 Anyone can edit! Let's keep our code organized! Use this README as a public billboard.<br>
 
-Heroku app URL: [coding-partners.herokuapp.com](http://www.coding-partners.herokuapp.com)<br>
+Heroku app URL: [coding-partners.herokuapp.com](http://coding-partners.herokuapp.com/home)<br>
+
 Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
 ## ANNOUNCEMENTS AND WARNINGS:
 Heroku App remote: https://git.heroku.com/coding-partners.git<br>
 Verify remotes in git:  git remote -v<br>
+<<<<<<< HEAD
 :information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
+=======
+Add Heroku remote:  heroku git:remote -a coding-partners<br>
+:information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
+:information_desk_person:Push non-master branch to Heroku remote for live testing: git push heroku-dev <your git branch name>:master<br>
+:information_desk_person:Github HTML preview, just insert the index.html into this page: [https://htmlpreview.github.io/](https://htmlpreview.github.io/)<br>
+>>>>>>> 07dd1671fc34935f9b51a659f1b3f9688a578b7c
 
 READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
