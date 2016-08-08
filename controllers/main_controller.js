@@ -56,10 +56,23 @@ router.put('/burgers/update/devour/:id', function(req, res) {
         //redirect to home upon response
         res.redirect('/burgers');
     })
+
+
 })
 */
 //router.put()
+router.put('/users/update/:id', function(req, res) {
+	models.Users.updateOne({name:req.body.name,
+							email:req.body.email,
+							languages:req.body.languages,
+							rating:req.body.rating,
+							userName:req.body.userNamem
+							password:req.body.password}).then (function(){
+								res.redirect('/home');
+							});
+});
 
+router.put()
 /*
 
 //delete method available because method override
