@@ -9,19 +9,19 @@ var sequelize = require('sequelize');
 
 var models = require('./models');
 
-
-const keys = require('./tokens.js');
+require('dotenv').config();
 
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
-//const keys = require('./tokens.js');
 
+var winston = require('winston');
+winston.add(winston.transports.File, { filename: 'error.log' });
+
+//var io = require('socket.io')(http);
 
 //OAUTH2
-/*
 var oauth2 = require('simple-oauth2')({
-	clientID: CLIENT_ID,
-	clientSecret: CLIENT_SECRET,
+	clientID: process.env.CLIENT_ID,
+	clientSecret: process.env.CLIENT_SECRET,
 	site: 'https://github.com/login',
 	tokenPath: '/oauth/access_token',
 	authorizationPath: '/oauth/authorize'
@@ -29,7 +29,7 @@ var oauth2 = require('simple-oauth2')({
 
 // Authorization uri definition
 var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://localhost:3000/callback',
+	redirect_uri: 'http://coding-partners.herokuapp.com/callback',
 	scope: 'notifications',
 	state: '3(#0/!~'
 });
@@ -45,11 +45,12 @@ app.get('/callback', function (req, res) {
 
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://localhost:3000/callback'
+		redirect_uri: 'http://coding-partners.herokuapp.com/callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
-		if (error) { console.log('Access Token Error', error.message); }
+		if (error) { winston.info('Access Token Error', error.message); }
+		result.expires_in = 2592000; // 30 days in seconds
 		token = oauth2.accessToken.create(result);
 	}
 });
@@ -57,9 +58,56 @@ app.get('/callback', function (req, res) {
 app.get('/', function (req, res) {
 	res.send('Hello<br><a href="/auth">Log in with Github</a>');
 });
-*/
 
-//Nothing new added below
+// Sample of a JSON access token (you got it through previous steps)
+var token = {
+  'access_token': '<access-token>',
+  'refresh_token': '<refresh-token>',
+  'expires_in': '7200'
+};
+
+// Create the access token wrapper
+var token = oauth2.accessToken.create(token);
+
+// Check if the token is expired. If expired it is refreshed.
+if (token.expired()) {
+  // Callbacks
+  token.refresh(function(error, result) {
+    token = result;
+  })
+
+  // Promises
+  token.refresh().then(function saveToken(result) {
+    token = result;
+  });
+}
+
+// Callbacks
+// Revoke only the access token
+token.revoke('access_token', function(error) {
+  // Session ended. But the refresh_token is still valid.
+
+  // Revoke the refresh_token
+  token.revoke('refresh_token', function(error) {
+    console.log('token revoked.');
+  });
+});
+
+// Promises
+// Revoke only the access token
+token.revoke('access_token')
+  .then(function revokeRefresh() {
+    // Revoke the refresh token
+    return token.revoke('refresh_token');
+  })
+  .then(function tokenRevoked() {
+    console.log('Token revoked');
+  })
+  .catch(function logError(error) {
+    console.log('Error revoking token.', error.message);
+  });
+
+/////
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
@@ -78,16 +126,15 @@ app.set('view engine', 'handlebars');
 //link to main controller, set as default page"/"
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
-
+/*
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
-});
+});*/
 
 //listen on port, if undefined, use 3000
 
 http.listen(process.env.PORT || 3000,function(){
-	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
+	process.env.PORT == undefined? winston.info("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
 });
-
