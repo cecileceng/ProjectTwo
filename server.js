@@ -51,9 +51,9 @@ app.get('/callback', function (req, res) {
 	function saveToken(error, result) {
 		if (error) { winston.log('Access Token Error', error.message); }
 		winston.log(JSON.stringify(result));
-		if (!result.expires_in) {
-			result.expires_in = 2592000; // 30 days in seconds
-		}
+		// if (!result.expires_in) {
+		// 	result.expires_in = 2592000; // 30 days in seconds
+		// }
 		token = oauth2.accessToken.create(result);
 		winston.log(JSON.stringify(token));
 	}
