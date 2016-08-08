@@ -1,8 +1,9 @@
 {
-  "name": "GIT some",
+  "name": "GITsome",
   "version": "1.0.0",
   "description": "a website to connect developers and students",
   "main": "server.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -26,6 +27,8 @@
     "sequelize": "^3.23.6",
     "sequelize-cli": "^2.4.0",
     "simple-oauth2": "^0.8.0",
-    "socket.io": "^1.4.8"
+    "socket.io": "^1.4.8",
+    "dotenv": "^2.0.0",
+    "winston": "^2.2.0"
   }
 }

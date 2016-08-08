@@ -9,19 +9,18 @@ var sequelize = require('sequelize');
 
 var models = require('./models');
 
+require('dotenv').config();
 
-const keys = require('./tokens.js');
+var winston = require('winston');
+winston.add(winston.transports.File, { filename: 'error.log' });
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-//const keys = require('./tokens.js');
-
 
 //OAUTH2
-/*
 var oauth2 = require('simple-oauth2')({
-	clientID: CLIENT_ID,
-	clientSecret: CLIENT_SECRET,
+	clientID: process.env.CLIENT_ID,
+	clientSecret: process.env.CLIENT_SECRET,
 	site: 'https://github.com/login',
 	tokenPath: '/oauth/access_token',
 	authorizationPath: '/oauth/authorize'
@@ -29,7 +28,7 @@ var oauth2 = require('simple-oauth2')({
 
 // Authorization uri definition
 var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://localhost:3000/callback',
+	redirect_uri: 'http://coding-partners.herokuapp.com/callback',
 	scope: 'notifications',
 	state: '3(#0/!~'
 });
@@ -45,21 +44,20 @@ app.get('/callback', function (req, res) {
 
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://localhost:3000/callback'
+		redirect_uri: 'http://coding-partners.herokuapp.com/callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
-		if (error) { console.log('Access Token Error', error.message); }
+		if (error) { winston.log('Access Token Error', error.message); }
+		winston.log(JSON.stringify(result));
 		token = oauth2.accessToken.create(result);
+		winston.log(JSON.stringify(token));
 	}
 });
 
 app.get('/', function (req, res) {
 	res.send('Hello<br><a href="/auth">Log in with Github</a>');
 });
-*/
-
-//Nothing new added below
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
