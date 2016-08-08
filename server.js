@@ -69,7 +69,8 @@ app.get('/callback', function (req, res) {
 		request(options, function(error, response, body) {
 			var info = JSON.parse(body);
 			console.log(JSON.stringify(info));
-			res.send(JSON.stringify(info));
+			res.send(JSON.stringify(info)); 
+			//this is the request we'll call to pull the information user name and avatar
 		})
 	}
 });
