@@ -3,9 +3,12 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
+const querystring = require('querystring');
 
 var exphbs = require('express-handlebars');
 var sequelize = require('sequelize');
+
+var request = require('request');
 
 var models = require('./models');
 
@@ -28,9 +31,9 @@ var oauth2 = require('simple-oauth2')({
 
 // Authorization uri definition
 var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://coding-partners.herokuapp.com/callback',
+	redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback',
 	scope: 'notifications',
-	state: '3(#0/!~'
+	state: '3(#0/!~' //if we're not using states remove this
 });
 
 // Initial page redirecting to Github
@@ -44,19 +47,35 @@ app.get('/callback', function (req, res) {
 
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://coding-partners.herokuapp.com/callback'
+		redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
 		if (error) { winston.log('Access Token Error', error.message); }
-		winston.log(JSON.stringify(result));
-		token = oauth2.accessToken.create(result);
-		winston.log(JSON.stringify(token));
+		if (typeof result === 'string') {
+			result = querystring.parse(result);
+		}
+		accessToken = oauth2.accessToken.create(result);
+		// console.log(JSON.stringify(accessToken.token.access_token));
+		// Find a way to save the access token from this object to use within session 
+
+		var options = {
+		  url: 'https://api.github.com/user',
+		  headers: {
+	  	    'User-Agent': 'request',
+		    'Authorization': 'token ' + accessToken.token.access_token
+		  }
+		};
+		request(options, function(error, response, body) {
+			var info = JSON.parse(body);
+			console.log(JSON.stringify(info));
+		})
 	}
 });
 
+
 app.get('/', function (req, res) {
-	res.send('Hello<br><a href="/auth">Log in with Github</a>');
+	res.render('index');
 });
 
 //serve up public folder and all content as static files to server.

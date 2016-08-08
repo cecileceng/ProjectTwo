@@ -1,5 +1,5 @@
 {
-  "name": "GITsome",
+  "name": "coding-partners",
   "version": "1.0.0",
   "description": "a website to connect developers and students",
   "main": "server.js",
@@ -29,6 +29,7 @@
     "simple-oauth2": "^0.8.0",
     "socket.io": "^1.4.8",
     "dotenv": "^2.0.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "request": "^2.74.0"
   }
 }
