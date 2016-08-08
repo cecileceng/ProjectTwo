@@ -29,7 +29,7 @@ var oauth2 = require('simple-oauth2')({
 
 // Authorization uri definition
 var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://coding-partners.herokuapp.com/callback',
+	redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback',
 	scope: 'notifications',
 	state: '3(#0/!~'
 });
@@ -45,7 +45,7 @@ app.get('/callback', function (req, res) {
 
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://coding-partners.herokuapp.com/callback'
+		redirect_uri: 'http://secret-garden-19417.herokuapp.com//callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
