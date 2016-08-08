@@ -50,8 +50,10 @@ app.get('/callback', function (req, res) {
 
 	function saveToken(error, result) {
 		if (error) { winston.info('Access Token Error', error.message); }
+		winston.info(result);
 		result.expires_in = 2592000; // 30 days in seconds
 		token = oauth2.accessToken.create(result);
+		winston.info(token);
 	}
 });
 
@@ -60,52 +62,49 @@ app.get('/', function (req, res) {
 });
 
 // Sample of a JSON access token (you got it through previous steps)
-var token = {
-  'access_token': '<access-token>',
-  'refresh_token': '<refresh-token>',
-  'expires_in': '7200'
-};
-
-// Create the access token wrapper
-var token = oauth2.accessToken.create(token);
+// var token = {
+//   'access_token': '<access-token>',
+//   'refresh_token': '<refresh-token>',
+//   'expires_in': '7200'
+// };
 
 // Check if the token is expired. If expired it is refreshed.
-if (token.expired()) {
-  // Callbacks
-  token.refresh(function(error, result) {
-    token = result;
-  })
+// if (token.expired()) {
+//   // Callbacks
+//   token.refresh(function(error, result) {
+//     token = result;
+//   })
 
-  // Promises
-  token.refresh().then(function saveToken(result) {
-    token = result;
-  });
-}
+//   // Promises
+//   token.refresh().then(function saveToken(result) {
+//     token = result;
+//   });
+// }
 
 // Callbacks
 // Revoke only the access token
-token.revoke('access_token', function(error) {
-  // Session ended. But the refresh_token is still valid.
+// token.revoke('access_token', function(error) {
+//   // Session ended. But the refresh_token is still valid.
 
-  // Revoke the refresh_token
-  token.revoke('refresh_token', function(error) {
-    console.log('token revoked.');
-  });
-});
+//   // Revoke the refresh_token
+//   token.revoke('refresh_token', function(error) {
+//     console.log('token revoked.');
+//   });
+// });
 
 // Promises
 // Revoke only the access token
-token.revoke('access_token')
-  .then(function revokeRefresh() {
-    // Revoke the refresh token
-    return token.revoke('refresh_token');
-  })
-  .then(function tokenRevoked() {
-    console.log('Token revoked');
-  })
-  .catch(function logError(error) {
-    console.log('Error revoking token.', error.message);
-  });
+// token.revoke('access_token')
+//   .then(function revokeRefresh() {
+//     // Revoke the refresh token
+//     return token.revoke('refresh_token');
+//   })
+//   .then(function tokenRevoked() {
+//     console.log('Token revoked');
+//   })
+//   .catch(function logError(error) {
+//     console.log('Error revoking token.', error.message);
+//   });
 
 /////
 
