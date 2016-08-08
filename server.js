@@ -49,11 +49,11 @@ app.get('/callback', function (req, res) {
 	}, saveToken);
 
 	function saveToken(error, result) {
-		if (error) { winston.info('Access Token Error', error.message); }
-		winston.info(result);
+		if (error) { winston.log('Access Token Error', error.message); }
+		winston.log(result);
 		result.expires_in = 2592000; // 30 days in seconds
 		token = oauth2.accessToken.create(result);
-		winston.info(token);
+		winston.log(token);
 	}
 });
 
