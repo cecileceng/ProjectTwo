@@ -45,7 +45,7 @@ app.get('/callback', function (req, res) {
 
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://secret-garden-19417.herokuapp.com//callback'
+		redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
