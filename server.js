@@ -9,8 +9,10 @@ var sequelize = require('sequelize');
 
 var models = require('./models');
 
-
-const keys = require('./tokens.js');
+//////////////////////////////////////////////
+/*commented out until we implement tokens.js*/
+//////////////////////////////////////////////
+//const keys = require('./tokens.js');
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
