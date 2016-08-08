@@ -1,15 +1,38 @@
 <header class="text-center">
-  <div class="jumbotron">
-    <h1 id="header">Coding Buddies near you.</h1>
-  </div>
 </header>
+<div class="main_container">
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo center"><h1>code.partners near you</h1></a>
+  <ul class="hide-on-med-and-down show-on-large">
+    <li><a href="/auth">Login with Github</a></li>
+  </ul>
+  <ul id="slide-out" class="side-nav fixed">
+    <li class="bold"><a href="/auth" class="waves-effect waves-teal">Login with Github</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  </div>
+</nav>
 <main>
-<div class="container text-center main_container">
-<div id="map_container">
-	<div id="map"></div>
-</div>
-<p>Lorem ipsum Blah Blah Blah!</p>
-</div>
+{{!-- <div class="container text-center"> --}}
+  <div id="map_container">
+  	<div id="map"></div>
+      <div id="message_box">
+      <ul id="messages"></ul>
+        <div id="messageInputBox">
+          <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Lorem ipsum Blah Blah Blah!</p>
+{{!-- </div> --}}
+
 </main>
+</div>{{!-- end main_container --}}
 <footer>
 </footer>
+
+
