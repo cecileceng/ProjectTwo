@@ -5,18 +5,6 @@ Heroku app URL: [coding-partners.herokuapp.com](http://coding-partners.herokuapp
 
 Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
-## ANNOUNCEMENTS AND WARNINGS:
-Heroku App remote: https://git.heroku.com/coding-partners.git<br>
-Verify remotes in git:  git remote -v<br>
-<<<<<<< HEAD
-:information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
-=======
-Add Heroku remote:  heroku git:remote -a coding-partners<br>
-:information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
-:information_desk_person:Push non-master branch to Heroku remote for live testing: git push heroku-dev <your git branch name>:master<br>
-:information_desk_person:Github HTML preview, just insert the index.html into this page: [https://htmlpreview.github.io/](https://htmlpreview.github.io/)<br>
->>>>>>> 07dd1671fc34935f9b51a659f1b3f9688a578b7c
-
 READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
 
 Heroku app URL: [coding-partners.herokuapp.com](http://coding-partners.herokuapp.com/home)<br>
@@ -53,7 +41,7 @@ Add Heroku remote:  heroku git:remote -a coding-partners<br>
 9. Must have MVC folder structure (DONE. Michael: 8-5-2016)
 10. Must meet good quality coding standards (Maybe done??)
 11. OPTIONAL : Utilize handlebars.js templating engine (DONE. ALL: 8-7-2016)
-12. OPTIONAL : Incorporate Authentication (not yet done)
+12. OPTIONAL : Incorporate Authentication (DONE. CECILE FOR REAL 8-8-2016)
 13. OPTIONAL : Use existing data set to power database (not yet done)
 14. OPTIONAL :  Create migration strategy (not yet done)
 15. IMPORTANT : Rehearse presentation (not yet done)
