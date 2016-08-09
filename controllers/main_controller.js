@@ -44,7 +44,8 @@ router.post('/users/create', function(req, res){
                             languages:req.body.languages,
                             rating:req.body.rating,
                             userName:req.body.userName,
-                            password:req.body.password}).then (function(){
+                            id:req.params.id
+                            }).then (function(){
                                 res.redirect('/home');
                             });
 });
@@ -61,18 +62,17 @@ router.put('/burgers/update/devour/:id', function(req, res) {
 })
 */
 //router.put()
+
 router.put('/users/update/:id', function(req, res) {
 	models.Users.updateOne({name:req.body.name,
 							email:req.body.email,
 							languages:req.body.languages,
 							rating:req.body.rating,
-							userName:req.body.userNamem
-							password:req.body.password}).then (function(){
+							userName:req.body.userName,where:{id:req.params.id}}).then (function(){
 								res.redirect('/home');
 							});
 });
 
-router.put()
 /*
 
 //delete method available because method override
@@ -88,6 +88,14 @@ router.delete('/burgers/delete/:id', function(req, res) {
 COMMENTED OUT THIS CODE FOR GITSOME
 
 */
+router.delete('/users/delete/:id', function(req, res){
+    models.Users.destroy(
+        {where:{
+            id:req.params.id
+        }}).then(function(){
+            res.redirect('/home');
+        });
+});
 
 
 //initial load/direct

@@ -1,15 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "database_development",
+    "password": " ",
+    "database": "developmentdb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "",
-    "database": "database_test",
+    "database": "Codr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
