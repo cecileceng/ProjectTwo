@@ -88,6 +88,12 @@ router.delete('/burgers/delete/:id', function(req, res) {
 COMMENTED OUT THIS CODE FOR GITSOME
 
 */
+
+//login method
+
+
+
+//delete method available because method override
 router.delete('/users/delete/:id', function(req, res){
     models.Users.destroy(
         {where:{
