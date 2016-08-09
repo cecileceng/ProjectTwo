@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="initial-scale=1.0">
+
+<!-- Compiled and minified jquery -->
+		<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+		<script>console.log("jquery loaded");</script>
+
+<!-- Compiled and minified Materialize CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+		<script>console.log("materialize css loaded");</script>
+
+<!-- Compiled and minified Materialize JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+		<script>console.log("materialize js loaded");</script>
+
+<!-- Compiled and minified bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script>console.log("bootstrap css loaded");</script>
+
+<!-- Rel links to js files -->
+		<link rel="stylesheet" href="/assets/css/main_theme.css" type="text/css">
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeD-FTSWUQZoG3uMwf3hvFHl5J3pk31yc&v=3&callback=initMap"></script>
+		<script src="/assets/javascript/maps.js"></script>
+		<script>console.log("maps async defer loaded");</script>
+
+	<title>GIT Some</title>
+	</head>
+	<body>
+		{{{ body }}}
+{{!-- Some JS files required for page-bottom positioning --}}
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    	<!--<script src="http://code.jquery.com/jquery-1.11.1.js"></script> ALREADY CALLED ABOVE-->
+    	<script src="/assets/javascript/chat.js"></script>
+    	<script src="/assets/javascript/interactive.js"></script>
+	</body>
+</html>
