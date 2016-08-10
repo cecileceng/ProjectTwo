@@ -23,7 +23,7 @@
 	        infoWindow.open(map, marker);
 	    });
 	} //end initMap
-
+/*
 	if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	        var userLocation = {
@@ -41,4 +41,9 @@
 	    handleLocationError(false, infoWindow, map.getCenter());
 	}
 
-	module.exports(userLocation);
+*/
+
+
+
+
+
