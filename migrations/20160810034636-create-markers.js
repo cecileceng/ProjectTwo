@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Markers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,23 +10,17 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
       githubID: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(60)
       },
-      languages: {
-        type: Sequelize.STRING
+      lat: {
+        type: Sequelize.DECIMAL(10,6)
       },
-      rating: {
-        type: Sequelize.INTEGER
+      lng: {
+        type: Sequelize.DECIMAL(10,6)
       },
-      userName: {
-        type: Sequelize.STRING
+      preferences: {
+        type: Sequelize.STRING(80)
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +35,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Markers');
   }
 };

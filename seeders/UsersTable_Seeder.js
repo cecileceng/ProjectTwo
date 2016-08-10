@@ -7,11 +7,9 @@ module.exports = {
         name: 'Todd the Builder',
         email: 'todd@codingpartners.com',
         githubID: 'TGreen97',
+        userName: 'TG747',
         languages: 'jQuery',
-        rating: '2',
-        userName: 'TG747'
-        //password: sha1('password'),
-
+        rating: '2'
       }
       ], {});
   },

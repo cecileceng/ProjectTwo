@@ -43,9 +43,10 @@ router.post('/users/create', function(req, res){
     models.Users.create({name:req.body.name,
                             email:req.body.email,
                              githubID:req.body.githubID,
+                             userName:req.body.userName,
                              languages:req.body.languages,
                              rating:req.body.rating,
-                             userName:req.body.userName}).then (function(){
+                             }).then (function(){
                                  res.redirect('/home');
                              });
 });
