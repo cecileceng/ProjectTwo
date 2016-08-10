@@ -1,5 +1,5 @@
 'use strict';
-var sha1 = require('sha1');
+//var sha1 = require('sha1');
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -9,8 +9,8 @@ module.exports = {
         githubID: 'TGreen97',
         languages: 'jQuery',
         rating: '2',
-        userName: 'TG747',
-        password: sha1('password'),
+        userName: 'TG747'
+        //password: sha1('password'),
 
       }
       ], {});

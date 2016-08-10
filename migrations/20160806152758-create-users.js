@@ -26,16 +26,15 @@ module.exports = {
       userName: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING(40)
-      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     });
   },
