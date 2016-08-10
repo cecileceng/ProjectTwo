@@ -122,9 +122,10 @@ app.get('/logout', function(req, res){
 //   the request is authenticated (typically via a persistent login session),
 //   the request will proceed.  Otherwise, the user will be redirected to the
 //   login page.
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) { return next(); }
-//   res.redirect('/login')
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+};
 
   //session stuff
 
@@ -182,9 +183,9 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
-//link to authentication controller, set as default page"/auth"
-var routes = require('./controllers/auth_controller.js');
-app.use('/', routes);
+// //link to authentication controller, set as default page"/auth"
+// var routes = require('./controllers/auth_controller.js');
+// app.use('/', routes);
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
