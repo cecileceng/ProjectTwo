@@ -20,8 +20,10 @@
   "homepage": "https://github.com/cecileceng/ProjectTwo#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "gulpfile": "^1.0.2",
     "method-override": "^2.3.6",
     "mysql": "^2.11.1",
     "sequelize": "^3.23.6",

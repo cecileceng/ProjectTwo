@@ -1,9 +1,10 @@
+'use strict';
 //dependencies
-const express = require('express');
-const methodOverride = require('method-override');
-const bodyParser = require('body-parser');
-const router = express.Router();
-const models = require('../models/users.js')
+var express = require('express');
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+var router = express.Router();
+var models = require('../models');
 
 //redirect to home route by default
 router.get('/', function(req, res) {
@@ -16,7 +17,7 @@ router.get('/home', function(req, res) {
 
 /*COMMENTED OUT THIS CODE FOR GITSOME
 
-//when directed to burgers route, get burger.js logic, call functions within it. 
+//when directed to burgers route, get burger.js logic, call functions within it.
 router.get('/burgers', function(req, res) {
     burger.selectAll(function(data) {
         //when called (it's never called) render response through index.handlebars
@@ -34,19 +35,20 @@ router.post('/burgers/create', function(req, res) {
 })
 */
 router.get('/users/create', function(req, res){
-    res.render('new_users');
+    res.render('users/new_users');
 });
 
 router.post('/users/create', function(req, res){
+    console.log("hello, world");
     models.Users.create({name:req.body.name,
                             email:req.body.email,
-                            githubID:req.body.githubID,
-                            languages:req.body.languages,
-                            rating:req.body.rating,
-                            userName:req.body.userName,
-                            password:req.body.password}).then (function(){
-                                res.redirect('/home');
-                            });
+                             githubID:req.body.githubID,
+                             userName:req.body.userName,
+                             languages:req.body.languages,
+                             rating:req.body.rating,
+                             }).then (function(){
+                                 res.redirect('/home');
+                             });
 });
 /*
 //update route
