@@ -33,7 +33,7 @@ Add Heroku remote:  heroku git:remote -a coding-partners<br>
 9. Must have MVC folder structure (DONE. Michael: 8-5-2016)
 10. Must meet good quality coding standards (Maybe done??)
 11. OPTIONAL : Utilize handlebars.js templating engine (DONE. ALL: 8-7-2016)
-12. OPTIONAL : Incorporate Authentication (not yet done)
+12. OPTIONAL : Incorporate Authentication (DONE. CECILE FOR REAL 8-8-2016)
 13. OPTIONAL : Use existing data set to power database (not yet done) 
 14. OPTIONAL :  Create migration strategy (not yet done)
 15. IMPORTANT : Rehearse presentation (not yet done)
