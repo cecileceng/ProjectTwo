@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const querystring = require('querystring');
 var exphbs = require('express-handlebars');
-var session = require('express-session');
+//var session = require('express-session');
 var sequelize = require('sequelize');
 var request = require('request');
 var models = require('./models');
@@ -17,12 +17,12 @@ var parseurl = require('parseurl')
 var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github2').Strategy;
-var partials = require('express-partials');
+//var partials = require('express-partials');
 
 app.use(require('serve-static')(__dirname + '/../../public'));
-app.use(require('cookie-parser')());
+//app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+//app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -70,7 +70,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.authenticate('github');
-
+/*
 passport.use(new GitHubStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
@@ -81,6 +81,7 @@ passport.use(new GitHubStrategy(
     });
   }
 ));
+*/
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
@@ -143,7 +144,7 @@ var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
 //link to authentication controller, set as default page"/auth"
-var routes = require('./controllers/auth_controller.js');
+//var routes = require('./controllers/auth_controller.js');
 app.use('/', routes);
 
 io.on('connection', function(socket){
