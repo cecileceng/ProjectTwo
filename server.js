@@ -13,7 +13,7 @@ var Sequelize = require('sequelize');
 const keys = require('./tokens.js');
 
 var http = require('http').Server(app);
-// var io = require('socket.io')(http);
+var io = require('socket.io')(http);
 
 //const keys = require('./tokens.js');
 
@@ -80,11 +80,11 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(msg){
-//     io.emit('chat message', msg);
-//   });
-// });
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
 
 //listen on port, if undefined, use 3000
 
