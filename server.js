@@ -13,10 +13,11 @@ require('dotenv').config();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var parseurl = require('parseurl')
+
 //passport stuff
 var passport = require('passport');
 var util = require('util');
-var GitHubStrategy = require('passport-github2').Strategy;
+var OAuth2Strategy = require('passport-oauth2').Strategy;
 var partials = require('express-partials');
 
 app.use(require('serve-static')(__dirname + '/../../public'));
@@ -26,7 +27,7 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport-github strategt
+//passport-github strategy
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
@@ -37,27 +38,53 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
-// Use the GitHubStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and GitHub
-//   profile), and invoke a callback with a user object.
-passport.use(new GitHubStrategy({
+passport.use(new OAuth2Strategy({
+    authorizationURL: 'https://www.github.com/oauth2/authorize',
+    tokenURL: 'https://www.github.com/oauth2/token',
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ exampleId: profile.id }, function (err, user) {
+      return cb(err, user);
     });
   }
 ));
+
+// // Authorization uri definition
+// var authorization_uri = oauth2.authCode.authorizationURL({
+// 	redirect_uri: 'http://127.0.0.1:3000/auth/github/callback',
+// 	scope: 'notifications',
+// 	state: '3(#0/!~' //if we're not using states remove this
+// });
+
+// // Initial page redirecting to Github
+// app.get('/auth', function (req, res) {
+// 	res.redirect(authorization_uri);
+// });
+
+// Use the GitHubStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and GitHub
+//   profile), and invoke a callback with a user object.
+// passport.use(new GitHubStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     // asynchronous verification, for effect...
+//     process.nextTick(function () {
+      
+//       // To keep the example simple, the user's GitHub profile is returned to
+//       // represent the logged-in user.  In a typical application, you would want
+//       // to associate the GitHub account with a user record in your database,
+//       // and return that user instead.
+//       return done(null, profile);
+//     });
+//   }
+// ));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -69,18 +96,18 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.authenticate('github');
+// passport.authenticate('github');
 
-passport.use(new GitHubStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
+// passport.use(new GitHubStrategy(
+//   function(username, password, done) {
+//     User.findOne({ username: username }, function (err, user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false); }
+//       if (!user.verifyPassword(password)) { return done(null, false); }
+//       return done(null, user);
+//     });
+//   }
+// ));
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
@@ -142,9 +169,9 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
-//link to authentication controller, set as default page"/auth"
-var routes = require('./controllers/auth_controller.js');
-app.use('/', routes);
+// //link to authentication controller, set as default page"/auth"
+// var routes = require('./controllers/auth_controller.js');
+// app.use('/', routes);
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){

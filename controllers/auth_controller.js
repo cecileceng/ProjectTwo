@@ -4,7 +4,7 @@ var util = require('util');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var GitHubStrategy = require('passport-github2').Strategy;
+var OAuth2Strategy = require('passport-oauth2').Strategy;
 var partials = require('express-partials');
 require('dotenv').config();
 
@@ -16,27 +16,41 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Use the GitHubStrategy within Passport.
+// Use the OAuth2Strategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and GitHub
 //   profile), and invoke a callback with a user object.
-passport.use(new GitHubStrategy({
+passport.use(new OAuth2Strategy({
+    authorizationURL: 'https://www.github.com/oauth2/authorize',
+    tokenURL: 'https://www.github.com/oauth2/token',
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ exampleId: profile.id }, function (err, user) {
+      return cb(err, user);
     });
   }
 ));
+
+// passport.use(new GitHubStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     // asynchronous verification, for effect...
+//     process.nextTick(function () {
+      
+//       // To keep the example simple, the user's GitHub profile is returned to
+//       // represent the logged-in user.  In a typical application, you would want
+//       // to associate the GitHub account with a user record in your database,
+//       // and return that user instead.
+//       return done(null, profile);
+//     });
+//   }
+// ));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -48,18 +62,26 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.authenticate('github');
+app.get('/auth/github',
+  passport.authenticate('oauth2'));
 
-passport.use(new GitHubStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
+app.get('/auth/github/callback',
+  passport.authenticate('oauth2', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+// passport.use(new GitHubStrategy(
+//   function(username, password, done) {
+//     User.findOne({ username: username }, function (err, user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false); }
+//       if (!user.verifyPassword(password)) { return done(null, false); }
+//       return done(null, user);
+//     });
+//   }
+// ));
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
