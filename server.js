@@ -13,6 +13,7 @@ require('dotenv').config();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var parseurl = require('parseurl')
+pry = require('pryjs')
 
 //passport stuff
 var passport = require('passport');
@@ -43,9 +44,22 @@ passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
   	//RETURN USER FIND OR CREATE HERE
-    // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
+  // 	User
+  // .findOrCreate({where: {githubId: profile.id}, defaults: {job: 'Technical Lead JavaScript'}})
+  // .spread(function(user, created) {
+  //   console.log(user.get({
+  //     plain: true
+  //   }))
+  //   console.log(created)
+  //   // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+  //   //   return done(err, user);
+  //   // });
+  // } name: DataTypes.STRING,
+  //   email: DataTypes.STRING,
+  //   githubID: DataTypes.STRING,
+  //   languages: DataTypes.STRING,
+  //   rating: DataTypes.INTEGER,
+  //   userName: DataTypes.STRING,
   }
 ));
 
