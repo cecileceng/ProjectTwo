@@ -49,11 +49,3 @@ html,body{
 	position: fixed;
 	bottom:0;
 }
-
-
-/* FRONTEND STYLING */
-nav {
-	position: absolute;
-    width: 100%;
-    z-index: 9999;
-}
