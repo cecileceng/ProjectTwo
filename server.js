@@ -1,24 +1,21 @@
 //DEPENDENCIES
-const express = require('express');
-const methodOverride = require('method-override');
-const bodyParser = require('body-parser');
-const app = express();
-const querystring = require('querystring');
-
+var express = require('express');
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+var app = express();
+var path = require('path');
 var exphbs = require('express-handlebars');
-var sequelize = require('sequelize');
+var Sequelize = require('sequelize');
 
-var request = require('request');
+//var models = require('./models');
 
-var models = require('./models');
 
-require('dotenv').config();
-
-var winston = require('winston');
-winston.add(winston.transports.File, { filename: 'error.log' });
+const keys = require('./tokens.js');
 
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+// var io = require('socket.io')(http);
+
+//const keys = require('./tokens.js');
 
 //OAUTH2
 var oauth2 = require('simple-oauth2')({
@@ -98,11 +95,11 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
-});
+// io.on('connection', function(socket){
+//   socket.on('chat message', function(msg){
+//     io.emit('chat message', msg);
+//   });
+// });
 
 //listen on port, if undefined, use 3000
 
