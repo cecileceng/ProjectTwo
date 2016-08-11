@@ -1,31 +1,13 @@
 //DEPENDENCIES
-<<<<<<< HEAD
-var express = require('express');
-var methodOverride = require('method-override');
-var bodyParser = require('body-parser');
-var app = express();
-var path = require('path');
-var exphbs = require('express-handlebars');
-var Sequelize = require('sequelize');
-
-//var models = require('./models');
-
-
-const keys = require('./tokens.js');
-
-var http = require('http').Server(app);
-// var io = require('socket.io')(http);
-
-//const keys = require('./tokens.js');
-=======
 const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
 const querystring = require('querystring');
+var path = require('path');
 var exphbs = require('express-handlebars');
 //var session = require('express-session');
-var sequelize = require('sequelize');
+var Sequelize = require('sequelize');
 var request = require('request');
 var models = require('./models');
 require('dotenv').config();
@@ -36,7 +18,8 @@ var parseurl = require('parseurl')
 var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github2').Strategy;
-//var partials = require('express-partials');
+
+const keys = require('./tokens.js');
 
 app.use(require('serve-static')(__dirname + '/../../public'));
 //app.use(require('cookie-parser')());
@@ -49,13 +32,13 @@ app.use(passport.session());
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
   });
->>>>>>> testing
+
 
 // Use the GitHubStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
@@ -69,7 +52,7 @@ passport.use(new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
+
       // To keep the example simple, the user's GitHub profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
@@ -103,7 +86,7 @@ passport.use(new GitHubStrategy(
 ));
 */
 
-app.post('/login', 
+app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
@@ -163,13 +146,7 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
-<<<<<<< HEAD
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(msg){
-//     io.emit('chat message', msg);
-//   });
-// });
-=======
+
 //link to authentication controller, set as default page"/auth"
 //var routes = require('./controllers/auth_controller.js');
 app.use('/', routes);
@@ -179,7 +156,6 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 });
->>>>>>> testing
 
 //listen on port, if undefined, use 3000
 
