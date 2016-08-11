@@ -1,38 +1,41 @@
 <header class="text-center">
 </header>
+
 <div class="main_container">
-<nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo center"><h1>code.partners near you</h1></a>
-  <ul class="hide-on-med-and-down show-on-large">
-    <li><a href="/auth/github">Login with Github</a></li>
-  </ul>
-  <ul id="slide-out" class="side-nav fixed">
-    <li class="bold"><a href="/auth/github" class="waves-effect waves-teal">Login with Github</a></li>
-    <li class="bold"><a href="/marker" class="waves-effect waves-teal">Create a New Marker</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-  </div>
-</nav>
-<main>
-{{!-- <div class="container text-center"> --}}
-  <div id="map_container">
-  	<div id="map"></div>
-      <div id="message_box">
-      <ul id="messages"></ul>
-        <div id="messageInputBox">
-          <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-          </form>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">
+        <h1>code.partners near you</h1>
+      </a>
+      <ul class="hide-on-med-and-down show-on-large">
+        <li><a href="/auth">Login with Github</a></li>
+      </ul>
+      <ul id="slide-out" class="side-nav fixed">
+        <li class="bold"><a href="/auth" class="waves-effect waves-teal">Login with Github</a></li>
+      </ul>
+      <a href="#" data-activates="slide-out" class="button-collapse">
+        <i class="mdi-navigation-menu"></i>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+  {{!-- <div class="container text-center"> --}}
+    <div id="map_container">
+    	<div id="map"></div>
+        <div id="message_box">
+          <ul id="messages"></ul>
+            <div id="messageInputBox">
+              <form action="">
+                <input id="m" autocomplete="off" /><button>Send</button>
+              </form>
+            </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <p>Lorem ipsum Blah Blah Blah!</p>
-{{!-- </div> --}}
-
-</main>
+    <p>Lorem ipsum Blah Blah Blah!</p>
+  {{!-- </div> --}}
+  </main>
 </div>{{!-- end main_container --}}
 
 <footer>
@@ -41,6 +44,6 @@
 <!-- Socket Chat Maps Scripts - Moved from Main Handlebars-->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeD-FTSWUQZoG3uMwf3hvFHl5J3pk31yc&v=3&callback=initMap"></script>
 <script src="/assets/javascript/maps.js"></script>
+<script src="/assets/javascript/chat.js"></script>
 <script>console.log("maps async defer loaded");</script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="/assets/javascript/chat.js"></script>
