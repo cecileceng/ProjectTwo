@@ -44,16 +44,20 @@ passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
   	//RETURN USER FIND OR CREATE HERE
-  // 	User
-  // .findOrCreate({where: {githubId: profile.id}, defaults: {job: 'Technical Lead JavaScript'}})
   // .spread(function(user, created) {
   //   console.log(user.get({
   //     plain: true
   //   }))
   //   console.log(created)
-  //   // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-  //   //   return done(err, user);
-  //   // });
+    models.Users.findOrCreate({
+      where: { githubId: profile.id },
+      defaults: { name: profile.name,
+                  email: profile.email,
+                  userName: profile.login }
+      },
+      function (err, user) {
+      return done(err, user);
+    });
   // } name: DataTypes.STRING,
   //   email: DataTypes.STRING,
   //   githubID: DataTypes.STRING,
@@ -81,7 +85,7 @@ app.use(passport.session());
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
