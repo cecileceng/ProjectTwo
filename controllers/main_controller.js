@@ -65,7 +65,7 @@ router.put('/burgers/update/devour/:id', function(req, res) {
 })
 */
 router.put('/users/update/:id', function(req, res){
-    models.users.update({
+    models.Users.update({
         languages:req.body.languages,
         rating:req.body.rating,
     }).then (function(){
