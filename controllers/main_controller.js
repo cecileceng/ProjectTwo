@@ -48,6 +48,7 @@ router.post('/users/create', function(req, res){
                                 res.redirect('/home');
                             });
 });
+
 /*
 //update route
 router.put('/burgers/update/devour/:id', function(req, res) {
