@@ -15,6 +15,10 @@ router.get('/home', function(req, res) {
     res.render('index');
 });
 
+router.get('/marker',function(req,res){
+    res.render('marker');
+});
+
 /*COMMENTED OUT THIS CODE FOR GITSOME
 
 //when directed to burgers route, get burger.js logic, call functions within it.
