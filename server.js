@@ -4,21 +4,67 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
 const querystring = require('querystring');
+var path = require('path');
 var exphbs = require('express-handlebars');
+//var session = require('express-session');
+var Sequelize = require('sequelize');
 var session = require('express-session');
-var sequelize = require('sequelize');
 var request = require('request');
 var models = require('./models');
-require('dotenv').config();
+//require('dotenv').config();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var parseurl = require('parseurl')
-pry = require('pryjs')
+var parseurl = require('parseurl');
+pry = require('pryjs');
 
 //passport stuff
 var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github2').Strategy;
+
+const keys = require('./tokens.js');
+
+app.use(require('serve-static')(__dirname + '/../../public'));
+//app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+//app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport-github strategt
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+// Use the GitHubStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and GitHub
+//   profile), and invoke a callback with a user object.
+//
+//passport.use(new GitHubStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     // asynchronous verification, for effect...
+//     process.nextTick(function () {
+
+//       // To keep the example simple, the user's GitHub profile is returned to
+//       // represent the logged-in user.  In a typical application, you would want
+//       // to associate the GitHub account with a user record in your database,
+//       // and return that user instead.
+//       return done(null, profile);
+//     });
+//   }
+// ));
+
 var partials = require('express-partials');
 
 // Passport session setup SERIALIZE/DESERIALIZE
@@ -67,6 +113,7 @@ passport.use(new GitHubStrategy({
   }
 ));
 
+
 // configure Express
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -84,6 +131,9 @@ app.use(passport.session());
 //AUTHENTICATE REQUESTS
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
