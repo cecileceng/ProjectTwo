@@ -1,9 +1,11 @@
 //dependencies
+pry = require('pryjs')
 const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const models = require('../models/users.js')
+//const models = require('../models/users.js')
+const models = require('../models');
 
 //redirect to home route by default
 router.get('/', function(req, res) {
@@ -39,6 +41,19 @@ router.post('/burgers/create', function(req, res) {
 */
 router.get('/users/create', function(req, res){
     res.render('new_users');
+});
+
+router.post('/marker/create',function(req,res){
+    //eval(pry.it)
+    models.Markers.create({
+        name: req.body.name,
+        lat: req.body.lat,
+        lng: req.body.lng,
+        title: req.body.title
+    }).then(function(){
+        //eval(pry.it)
+        res.redirect('/home');
+    });
 });
 
 router.post('/users/create', function(req, res){

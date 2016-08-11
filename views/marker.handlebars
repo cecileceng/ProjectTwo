@@ -2,11 +2,13 @@
 <h1>Create a New Marker</h1>
 </header>
 <div class="main_container">
-	<form action="model/method/action/{{this.id}}?_method=PUT" method="POST">
+	<form action="marker/create" method="POST">
 		<h4>name value, we'll remove this input and populate with github, this is for testing DB</h4>
-        <input type="text"/>
+        <input type="text" name="name"/>
         <h4>Comments????</h4>
-        <input type="text"/>
+        <input type="text" name="title"/>
+        <input type="text" name="lat" id="latBox" class="hidden"/>
+        <input type="text" name="lng" id="lngBox" class="hidden"/>
         <button type="submit">Send</button>
     </form>
 
