@@ -5,6 +5,8 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var models = require('../models');
+pry = require('pryjs');
+
 
 //redirect to home route by default
 router.get('/', function(req, res) {
@@ -40,6 +42,19 @@ router.post('/burgers/create', function(req, res) {
 */
 router.get('/users/create', function(req, res){
     res.render('users/new_users');
+});
+
+router.post('/marker/create',function(req,res){
+    //eval(pry.it)
+    models.Markers.create({
+        name: req.body.name,
+        lat: req.body.lat,
+        lng: req.body.lng,
+        title: req.body.title
+    }).then(function(){
+        //eval(pry.it)
+        res.redirect('/home');
+    });
 });
 
 router.post('/users/create', function(req, res){
