@@ -9,14 +9,13 @@ var exphbs = require('express-handlebars');
 //var session = require('express-session');
 var Sequelize = require('sequelize');
 var session = require('express-session');
-var sequelize = require('sequelize');
 var request = require('request');
 var models = require('./models');
 //require('dotenv').config();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var parseurl = require('parseurl')
-pry = require('pryjs')
+var parseurl = require('parseurl');
+pry = require('pryjs');
 
 //passport stuff
 var passport = require('passport');
@@ -91,16 +90,20 @@ passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
   	//RETURN USER FIND OR CREATE HERE
-  // 	User
-  // .findOrCreate({where: {githubId: profile.id}, defaults: {job: 'Technical Lead JavaScript'}})
   // .spread(function(user, created) {
   //   console.log(user.get({
   //     plain: true
   //   }))
   //   console.log(created)
-  //   // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-  //   //   return done(err, user);
-  //   // });
+    models.Users.findOrCreate({
+      where: { githubId: profile.id },
+      defaults: { name: profile.name,
+                  email: profile.email,
+                  userName: profile.login }
+      },
+      function (err, user) {
+      return done(err, user);
+    });
   // } name: DataTypes.STRING,
   //   email: DataTypes.STRING,
   //   githubID: DataTypes.STRING,
@@ -128,7 +131,6 @@ app.use(passport.session());
 //AUTHENTICATE REQUESTS
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
-
 
 app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),

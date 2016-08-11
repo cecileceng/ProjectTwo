@@ -5,8 +5,8 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var models = require('../models');
-pry = require('pryjs');
 
+var pry = require('pryjs');
 
 //redirect to home route by default
 router.get('/', function(req, res) {

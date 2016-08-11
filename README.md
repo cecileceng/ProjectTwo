@@ -1,5 +1,12 @@
 # CODR! The Grindr for Devs.
 Anyone can edit! Let's keep our code organized! Use this README as a public billboard.<br>
+
+Heroku app URL: [coding-partners.herokuapp.com](http://coding-partners.herokuapp.com/home)<br>
+
+Webpage URL: [coding.partners](https://www.coding.partners)<br>
+
+READ THE DOCUMENTATION. I'VE LISTED IMPORTANT INFO IN HERE.
+
 Heroku app URL: [coding-partners.herokuapp.com](http://coding-partners.herokuapp.com/home)<br>
 Webpage URL: [coding.partners](https://www.coding.partners)<br>
 
@@ -9,8 +16,9 @@ Heroku App remote: https://git.heroku.com/coding-partners.git<br>
 Verify remotes in git:  git remote -v<br>
 Add Heroku remote:  heroku git:remote -a coding-partners<br>
 :information_desk_person:Add Heroku remote:  heroku git:remote -a coding-partners<br>
-:information_desk_person:Push non-master branch to Heroku remote for live testing: git push heroku yourbranch:master<br>
+:information_desk_person:Push non-master branch to Heroku remote for live testing: git push heroku-dev <your git branch name>:master<br>
 :information_desk_person:Github HTML preview, just insert the index.html into this page: [https://htmlpreview.github.io/](https://htmlpreview.github.io/)<br>
+
 
 ##README STRUCTURE
 1. Announcements
@@ -34,12 +42,12 @@ Add Heroku remote:  heroku git:remote -a coding-partners<br>
 10. Must meet good quality coding standards (Maybe done??)
 11. OPTIONAL : Utilize handlebars.js templating engine (DONE. ALL: 8-7-2016)
 12. OPTIONAL : Incorporate Authentication (DONE. CECILE FOR REAL 8-8-2016)
-13. OPTIONAL : Use existing data set to power database (not yet done) 
+13. OPTIONAL : Use existing data set to power database (not yet done)
 14. OPTIONAL :  Create migration strategy (not yet done)
 15. IMPORTANT : Rehearse presentation (not yet done)
 16. IMPORTANT : Build files and slideshow for presentation (not yet done)
 
-##WORKFLOW 
+##WORKFLOW
 #####All of us will have direct commit access to Cecile's repository as project contributors. But remember:
 1. NEVER work on branch master! Master is perfection, and is representative of our latest progress!
 2. Do not push or pull from github with uncommitted changes on your local machine. This will cause conflicts.
@@ -64,7 +72,7 @@ Add Heroku remote:  heroku git:remote -a coding-partners<br>
 
 ##PRESENTATION
 
-#####Our presentation time is 10 minutes. This is a formal presentation. We will need to explain the following in detail: 
+#####Our presentation time is 10 minutes. This is a formal presentation. We will need to explain the following in detail:
 1. Overall concept
 2. Motivation for development
 3. Design process
@@ -77,7 +85,7 @@ Add Heroku remote:  heroku git:remote -a coding-partners<br>
 2. Design
 3. Functionality
 4. Collaboration
-5. Presentation 
+5. Presentation
 6. Technical sophistication??? (wasn't listed in the slideshow, but we were graded on it during the first project)
 
 ##NOTES
