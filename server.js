@@ -1,66 +1,131 @@
 //DEPENDENCIES
-var express = require('express');
-var methodOverride = require('method-override');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
+const app = express();
+const querystring = require('querystring');
 var path = require('path');
 var exphbs = require('express-handlebars');
+//var session = require('express-session');
 var Sequelize = require('sequelize');
-
-//var models = require('./models');
-
+var request = require('request');
+var models = require('./models');
+require('dotenv').config();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var parseurl = require('parseurl')
+//passport stuff
+var passport = require('passport');
+var util = require('util');
+var GitHubStrategy = require('passport-github2').Strategy;
 
 const keys = require('./tokens.js');
 
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+app.use(require('serve-static')(__dirname + '/../../public'));
+//app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+//app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-//const keys = require('./tokens.js');
+//passport-github strategt
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
 
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
-//OAUTH2
+// Use the GitHubStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and GitHub
+//   profile), and invoke a callback with a user object.
+passport.use(new GitHubStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's GitHub profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the GitHub account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+passport.authenticate('github');
 /*
-var oauth2 = require('simple-oauth2')({
-	clientID: CLIENT_ID,
-	clientSecret: CLIENT_SECRET,
-	site: 'https://github.com/login',
-	tokenPath: '/oauth/access_token',
-	authorizationPath: '/oauth/authorize'
-});
-
-// Authorization uri definition
-var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://localhost:3000/callback',
-	scope: 'notifications',
-	state: '3(#0/!~'
-});
-
-// Initial page redirecting to Github
-app.get('/auth', function (req, res) {
-	res.redirect(authorization_uri);
-});
-
-// Callback service parsing the authorization token and asking for the access token
-app.get('/callback', function (req, res) {
-	var code = req.query.code;
-
-	oauth2.authCode.getToken({
-		code: code,
-		redirect_uri: 'http://localhost:3000/callback'
-	}, saveToken);
-
-	function saveToken(error, result) {
-		if (error) { console.log('Access Token Error', error.message); }
-		token = oauth2.accessToken.create(result);
-	}
-});
-
-app.get('/', function (req, res) {
-	res.send('Hello<br><a href="/auth">Log in with Github</a>');
-});
+passport.use(new GitHubStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
 */
 
-//Nothing new added below
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+  //session stuff
+
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
+
+// var sessionVar = session({ secret: 'keyboard cat', resave: false, saveUninitialized: false });
+// console.log(typeof sessionVar);
+// console.log(typeof partials());
+
+// app.use(function (req, res, next) {
+//   var views = req.session.views
+
+//   if (!views) {
+//     views = req.session.views = {}
+//   }
+
+//   // get the url pathname
+//   var pathname = parseurl(req).pathname
+
+//   // count the views
+//   views[pathname] = (views[pathname] || 0) + 1
+
+//   next()
+// });
+
+// app.get('/foo', function (req, res, next) {
+//   res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
+// });
+
+// app.get('/bar', function (req, res, next) {
+//   res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
+// });
 
 //serve up public folder and all content as static files to server.
 app.use(express.static('public'));
@@ -80,6 +145,10 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/main_controller.js');
 app.use('/', routes);
 
+//link to authentication controller, set as default page"/auth"
+//var routes = require('./controllers/auth_controller.js');
+app.use('/', routes);
+
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
@@ -91,4 +160,3 @@ io.on('connection', function(socket){
 http.listen(process.env.PORT || 3000,function(){
 	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
 });
-

@@ -1,58 +1,46 @@
-<header class="text-center"></header>
 
+<header class="text-center">
+</header>
+<div class="main_container">
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">
-      <h1>code.partners near you</h1>
-    </a>
-    <ul class="hide-on-med-and-down">
-      <li><a href="#!">Login with Github</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
-    </ul>
-    <ul id="slide-out" class="side-nav fixed">
-        <li class="bold"><a href="#!" class="waves-effect waves-teal">First Sidebar Link</a></li>
-        <li class="bold"><a href="#!" class="">Second Sidebar Link</a></li>
-        <li class="no-padding">
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a class="collapsible-header waves-effect waves-teal">Dropdown<i class="mdi-navigation-arrow-drop-down"></i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li><a href="#!">First</a></li>
-                  <li><a href="#!">Second</a></li>
-                  <li><a href="#!">Third</a></li>
-                  <li><a href="#!">Fourth</a></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
-    </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse">
-      <i class="mdi-navigation-menu"></i>
-    </a>
+    <a href="#" class="brand-logo center"><h1>code.partners near you</h1></a>
+  <ul class="hide-on-med-and-down show-on-large">
+    <li><a href="/auth">Login with Github</a></li>
+  </ul>
+  <ul id="slide-out" class="side-nav fixed">
+    <li class="bold"><a href="/auth" class="waves-effect waves-teal">Login with Github</a></li>
+    <li class="bold"><a href="/marker" class="waves-effect waves-teal">Create a New Marker</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
 </nav>
 <main>
-  <div class="container text-center main_container">
-    <div id="map_container">
-    	<div id="map"></div>
+{{!-- <div class="container text-center"> --}}
+  <div id="map_container">
+  	<div id="map"></div>
+      <div id="message_box">
+      <ul id="messages"></ul>
+        <div id="messageInputBox">
+          <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <p>Lorem ipsum Blah Blah Blah!</p>
   </div>
-  <div id="message_box">
-    <ul id="messages"></ul>
-      <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-      </form>
-  </div>
+
+  <p>Lorem ipsum Blah Blah Blah!</p>
+{{!-- </div> --}}
+
 </main>
+</div>{{!-- end main_container --}}
 
 <footer>
 </footer>
 
-<!-- Google Maps Script - Moved from Main Handlebars-->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeD-FTSWUQZoG3uMwf3hvFHl5J3pk31yc%26v=3%26callback=initMap"></script>
+<!-- Socket Chat Maps Scripts - Moved from Main Handlebars-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeD-FTSWUQZoG3uMwf3hvFHl5J3pk31yc&v=3&callback=initMap"></script>
 <script src="/assets/javascript/maps.js"></script>
 <script>console.log("maps async defer loaded");</script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
