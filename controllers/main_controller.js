@@ -15,6 +15,10 @@ router.get('/home', function(req, res) {
     res.render('index');
 });
 
+router.get('/marker',function(req,res){
+    res.render('marker');
+});
+
 /*COMMENTED OUT THIS CODE FOR GITSOME
 
 //when directed to burgers route, get burger.js logic, call functions within it.
@@ -50,6 +54,7 @@ router.post('/users/create', function(req, res){
                                  res.redirect('/home');
                              });
 });
+
 /*
 //update route
 router.put('/burgers/update/devour/:id', function(req, res) {
