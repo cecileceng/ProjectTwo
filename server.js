@@ -4,80 +4,134 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const app = express();
 const querystring = require('querystring');
-
 var exphbs = require('express-handlebars');
+var session = require('express-session');
 var sequelize = require('sequelize');
-
 var request = require('request');
-
 var models = require('./models');
-
 require('dotenv').config();
-
-var winston = require('winston');
-winston.add(winston.transports.File, { filename: 'error.log' });
-
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var parseurl = require('parseurl')
+pry = require('pryjs')
 
-//OAUTH2
-var oauth2 = require('simple-oauth2')({
-	clientID: process.env.CLIENT_ID,
-	clientSecret: process.env.CLIENT_SECRET,
-	site: 'https://github.com/login',
-	tokenPath: '/oauth/access_token',
-	authorizationPath: '/oauth/authorize'
+//passport stuff
+var passport = require('passport');
+var util = require('util');
+var GitHubStrategy = require('passport-github2').Strategy;
+var partials = require('express-partials');
+
+// Passport session setup SERIALIZE/DESERIALIZE
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete GitHub profile is serialized
+//   and deserialized.
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
 
-// Authorization uri definition
-var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback',
-	scope: 'notifications',
-	state: '3(#0/!~' //if we're not using states remove this
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
 });
 
-// Initial page redirecting to Github
-app.get('/auth', function (req, res) {
-	res.redirect(authorization_uri);
+//passport-github2 CONFIGURE STRATEGY
+passport.use(new GitHubStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+  	//RETURN USER FIND OR CREATE HERE
+  // 	User
+  // .findOrCreate({where: {githubId: profile.id}, defaults: {job: 'Technical Lead JavaScript'}})
+  // .spread(function(user, created) {
+  //   console.log(user.get({
+  //     plain: true
+  //   }))
+  //   console.log(created)
+  //   // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+  //   //   return done(err, user);
+  //   // });
+  // } name: DataTypes.STRING,
+  //   email: DataTypes.STRING,
+  //   githubID: DataTypes.STRING,
+  //   languages: DataTypes.STRING,
+  //   rating: DataTypes.INTEGER,
+  //   userName: DataTypes.STRING,
+  }
+));
+
+// configure Express
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(partials());
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+//app.use(methodOverride());
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+//app.use(express.static(__dirname + '/public'));
+
+//AUTHENTICATE REQUESTS
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
-// Callback service parsing the authorization token and asking for the access token
-app.get('/callback', function (req, res) {
-	var code = req.query.code;
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
 
-	oauth2.authCode.getToken({
-		code: code,
-		redirect_uri: 'http://secret-garden-19417.herokuapp.com/callback'
-	}, saveToken);
+//  session stuff
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
-	function saveToken(error, result) {
-		if (error) { winston.log('Access Token Error', error.message); }
-		if (typeof result === 'string') {
-			result = querystring.parse(result);
-		}
-		accessToken = oauth2.accessToken.create(result);
-		// console.log(JSON.stringify(accessToken.token.access_token));
-		// Find a way to save the access token from this object to use within session 
+app.use(function (req, res, next) {
+  var views = req.session.views
 
-		var options = {
-		  url: 'https://api.github.com/user',
-		  headers: {
-	  	    'User-Agent': 'request',
-		    'Authorization': 'token ' + accessToken.token.access_token
-		  }
-		};
-		request(options, function(error, response, body) {
-			var info = JSON.parse(body);
-			console.log(JSON.stringify(info));
-			res.send(JSON.stringify(info)); 
-			//this is the request we'll call to pull the information user name and avatar
-		})
-	}
+  if (!views) {
+    views = req.session.views = {}
+  }
+
+  // get the url pathname
+  var pathname = parseurl(req).pathname
+
+  // count the views
+  views[pathname] = (views[pathname] || 0) + 1
+
+  next()
 });
 
+app.get('/foo', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
+});
 
-app.get('/', function (req, res) {
-	res.render('index');
+app.get('/bar', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
 });
 
 //serve up public folder and all content as static files to server.
@@ -109,4 +163,3 @@ io.on('connection', function(socket){
 http.listen(process.env.PORT || 3000,function(){
 	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
 });
-
