@@ -99,7 +99,7 @@ passport.deserializeUser(function(obj, done) {
       // var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
       defaults: { name: user.name,
                 email: user.email,
-                userName: user.login }}
+                userName: profile }}
       models.Users.findOrCreate(options)
       .spread(function(user, created){
         var err = undefined;
@@ -107,6 +107,9 @@ passport.deserializeUser(function(obj, done) {
       });
     }
   ));
+
+  // var options = {where: {githubID: profile.githubID},
+  //     defaults: profile};
 
 // //passport-github2 CONFIGURE STRATEGY
 // passport.use(new GitHubStrategy({
