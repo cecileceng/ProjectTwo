@@ -89,29 +89,26 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-  	//RETURN USER FIND OR CREATE HERE
+    //RETURN USER FIND OR CREATE HERE
   // .spread(function(user, created) {
   //   console.log(user.get({
   //     plain: true
   //   }))
   //   console.log(created)
-    models.Users.findOrCreate({
-      where: { githubId: profile.id },
+  var options = {where: { githubId: profile.id },
       defaults: { name: profile.name,
                   email: profile.email,
-                  userName: profile.login }
-      },
-      function (err, user) {
-      return done(err, user);
-    });
+                  userName: profile.login }};
+  models.Users.findOrCreate(options)
+.spread(function(user, created) {
+return done(err, user);
+})
   // } name: DataTypes.STRING,
   //   email: DataTypes.STRING,
   //   githubID: DataTypes.STRING,
   //   languages: DataTypes.STRING,
   //   rating: DataTypes.INTEGER,
   //   userName: DataTypes.STRING,
-  }
-));
 
 
 // configure Express
@@ -140,7 +137,7 @@ app.get('/auth/github/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
-  });
+  }));
 
 app.get('/logout', function(req, res){
   req.logout();
@@ -215,5 +212,5 @@ io.on('connection', function(socket){
 //listen on port, if undefined, use 3000
 
 http.listen(process.env.PORT || 3000,function(){
-	process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
+  process.env.PORT == undefined? console.log("App listening on PORT 3000"):console.log("App listening on PORT" + process.env.PORT);
 });
