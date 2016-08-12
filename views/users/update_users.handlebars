@@ -1,0 +1,48 @@
+<!-- UPDATING FORM FOR MATERIALIZE CSS
+<form action="/users/update" method="post">
+    Name: <input type="text" name="name" />
+    <br>
+    Email: <input type="text" name="email" />
+    <br>
+    GitHubID: <input type="text" name="githubID" />
+    <br>
+    UserName: <input type="text" name="userName" />
+    <br>
+    Langauges: <input type="text" name="languages" />
+    <br>
+    Rating: <input type="text" name="rating" />
+    <br>
+    <input type="submit" value="Add User" />
+</form>
+-->
+
+
+<div class="row" id="userUpdateForm">
+    <form action="/users/update/{{id}}" method="put" class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Update your Name" id="name" type="text" class="validate" name="name">
+          <label for="name">Name:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Update your Email" id="email" type="text" class="validate" name="email">
+          <label for="email">Email:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Update your Langauge preferences" id="email" type="text" class="validate" name="languages">
+          <label for="languages">Languages:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Update your Rating" id="rating" type="text" class="validate" name="rating">
+          <label for="rating">Rating:</label>
+        </div>
+      </div>
+      <input type="submit" value="Update Profile" />
+    </form>
+</div>

@@ -5,9 +5,8 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var models = require('../models');
-var pry = require('pryjs');
 
-//const models = require('../models/users.js')
+var pry = require('pryjs');
 
 //redirect to home route by default
 router.get('/', function(req, res) {
@@ -41,8 +40,8 @@ router.post('/burgers/create', function(req, res) {
     })
 })
 */
-router.get('/users/create', function(req, res){
-    res.render('users/new_users');
+router.get('/users/update/:id', function(req, res){
+    res.render('users/update_users');
 });
 
 router.post('/marker/create',function(req,res){
@@ -57,19 +56,22 @@ router.post('/marker/create',function(req,res){
         res.redirect('/home');
     });
 });
+//commented out the old create route
+// router.post('/users/create', function(req, res){
+//     console.log("hello, world");
+//     models.Users.create({name:req.body.name,
+//                             email:req.body.email,
+//                              githubID:req.body.githubID,
+//                              userName:req.body.userName,
+//                              languages:req.body.languages,
+//                              rating:req.body.rating,
+//                              }).then (function(){
+//                                  res.redirect('/home');
+//                              });
+// });
 
-router.post('/users/create', function(req, res){
-    console.log("hello, world");
-    models.Users.create({name:req.body.name,
-                            email:req.body.email,
-                             githubID:req.body.githubID,
-                             userName:req.body.userName,
-                             languages:req.body.languages,
-                             rating:req.body.rating,
-                             }).then (function(){
-                                 res.redirect('/home');
-                             });
-});
+
+
 
 /*
 //update route
@@ -81,6 +83,16 @@ router.put('/burgers/update/devour/:id', function(req, res) {
     })
 })
 */
+router.put('/users/update/:id', function(req, res){
+    models.Users.update({
+        languages:req.body.languages,
+        rating:req.body.rating,
+        email:req.body.email,
+        name:req.body.name
+    }).then (function(){
+        res.redirect('/home');
+    });
+});
 //router.put()
 
 /*
