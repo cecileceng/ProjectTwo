@@ -7,7 +7,7 @@ const querystring = require('querystring');
 var path = require('path');
 var exphbs = require('express-handlebars');
 //var session = require('express-session');
-var Sequelize = require('sequelize');
+//var Sequelize = require('sequelize');
 var session = require('express-session');
 var request = require('request');
 var models = require('./models');
@@ -16,8 +16,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var parseurl = require('parseurl');
 pry = require('pryjs');
-
-var sequelize = new Sequelize('mysql://vqr7tqxr8ba5rxd1:dbw35kmojsfrn4jz@gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/iybeq6p9pz3ehlaq');
 
 //passport stuff
 var passport = require('passport');
@@ -84,18 +82,19 @@ passport.deserializeUser(function(obj, done) {
 });
 
   passport.use(new GitHubStrategy({
-    clientID: 'd34e37706529a775c0b1',//process.env.CLIENT_ID,
-    clientSecret: '0bdd99451981a98386c96ebda7ef57dc5af2a0c0',//process.env.CLIENT_SECRET,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
-    function(accessToken, refreshToken, profile, done){
-      var options = {where: {githubID: profile.id },
-      defaults: { name: profile.name,
-                email: profile.email,
-                userName: profile.login }}
+    function(accessToken, refreshToken, user, done){
+      var profile = user._json;
+      console.log(profile);
+      var options = {where: [{githubID: user.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
+      defaults: [{name: profile.name}, {email: profile.email}, {userName: profile.login}]}
       models.Users.findOrCreate(options)
       .spread(function(user, created){
-        return done(err, users);
+        var err = undefined;
+        return done(err, user);
       });
     }
   ));
