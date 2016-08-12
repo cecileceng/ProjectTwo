@@ -82,9 +82,9 @@ passport.deserializeUser(function(obj, done) {
 });
 
   passport.use(new GitHubStrategy({
-    clientID: process.env.CLIENT_ID || 'mykeys',
-    clientSecret: process.env.CLIENT_SECRET || 'mykeys',
-    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://coding-partners.herokuapp.com/auth/github/callback"
   },
     function(accessToken, refreshToken, user, done){
       // var js = JSON.parse(user);
@@ -99,7 +99,7 @@ passport.deserializeUser(function(obj, done) {
       // var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
       defaults: { name: user.name,
                 email: user.email,
-                userName: profile }}
+                userName: user.login }}
       models.Users.findOrCreate(options)
       .spread(function(user, created){
         var err = undefined;
@@ -107,9 +107,6 @@ passport.deserializeUser(function(obj, done) {
       });
     }
   ));
-
-  // var options = {where: {githubID: profile.githubID},
-  //     defaults: profile};
 
 // //passport-github2 CONFIGURE STRATEGY
 // passport.use(new GitHubStrategy({
