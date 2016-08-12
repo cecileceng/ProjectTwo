@@ -17,6 +17,8 @@ var io = require('socket.io')(http);
 var parseurl = require('parseurl');
 pry = require('pryjs');
 
+debugger;
+
 //passport stuff
 var passport = require('passport');
 var util = require('util');
@@ -66,7 +68,6 @@ app.get('/auth/github/callback',
 // ));
 
 var partials = require('express-partials');
-
 // Passport session setup SERIALIZE/DESERIALIZE
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -82,27 +83,45 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-//passport-github2 CONFIGURE STRATEGY
-passport.use(new GitHubStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+  passport.use(new GitHubStrategy({
+    clientID: 'd34e37706529a775c0b1',//process.env.CLIENT_ID,
+    clientSecret: '0bdd99451981a98386c96ebda7ef57dc5af2a0c0',//process.env.CLIENT_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
-    //RETURN USER FIND OR CREATE HERE
-  // .spread(function(user, created) {
-  //   console.log(user.get({
-  //     plain: true
-  //   }))
-  //   console.log(created)
-  var options = {where: { githubId: profile.id },
+    function(accessToken, refreshToken, profile, done){
+      var options = {where: {githubID: profile.id },
       defaults: { name: profile.name,
-                  email: profile.email,
-                  userName: profile.login }};
-  models.Users.findOrCreate(options)
-.spread(function(user, created) {
-return done(err, user);
-})
+                email: profile.email,
+                userName: profile.login }}
+      models.Users.findOrCreate(options)
+      .spread(function(user, created){
+        return done(err, users);
+      });
+    }
+  ));
+
+// //passport-github2 CONFIGURE STRATEGY
+// passport.use(new GitHubStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   }),
+//   function(accessToken, refreshToken, profile, done) {
+//     //RETURN USER FIND OR CREATE HERE
+//   // .spread(function(user, created) {
+//   //   console.log(user.get({
+//   //     plain: true
+//   //   }))
+//   //   console.log(created)
+//   var options = {where: { githubId: profile.id },
+//       defaults: { name: profile.name,
+//                   email: profile.email,
+//                   userName: profile.login }};
+//   models.Users.findOrCreate(options)
+// .spread(function(user, created) {
+// return done(err, user);
+// })
+// }
   // } name: DataTypes.STRING,
   //   email: DataTypes.STRING,
   //   githubID: DataTypes.STRING,
