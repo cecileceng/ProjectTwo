@@ -40,7 +40,7 @@ router.post('/burgers/create', function(req, res) {
     })
 })
 */
-router.get('/users/update', function(req, res){
+router.get('/users/update/:id', function(req, res){
     res.render('users/update_users');
 });
 
@@ -83,7 +83,7 @@ router.put('/burgers/update/devour/:id', function(req, res) {
     })
 })
 */
-router.put('/users/update/', function(req, res){
+router.put('/users/update/:id', function(req, res){
     models.Users.update({
         languages:req.body.languages,
         rating:req.body.rating,
