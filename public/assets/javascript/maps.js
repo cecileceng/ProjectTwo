@@ -33,6 +33,8 @@ console.log("Total number of markers returned from database = " + totalNumberOfM
 //all children of master div
 var markerInfoDivs = infoInfoInfo[0].children;
 
+var infowindowsArray =[];
+
 //for total number of markers
 for(i=0; i<totalNumberOfMarkers; i++){
 	//log current marker
@@ -75,16 +77,32 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	var aWildMarker = new google.maps.Marker({
             position: locationObjectForMarker, 
             map: map, //targets var map, which tells program which map to add marker to.
-            title: theCurrentTitleText //appears if you hover over marker
+            title: theCurrentTitleText, //appears if you hover over marker
+            //infoWindow: currentInfoWindow,
+            infoWindowIndex: i
         });
-        var infoWindow = new google.maps.InfoWindow({
+
+        var innerContent = theCurrentCreatorText + theCurrentTitleText + theCurrentTimeText;
+
+        var currentInfoWindow = new google.maps.InfoWindow({
             //info window does not open automatically. requires event listener.
-            content: theCurrentCreatorText + theCurrentTitleText + theCurrentTimeText
+            content: innerContent
         });
+
+    google.maps.event.addListener(aWildMarker, 'click', function(event) {
+        map.panTo(event.latLng);
+        map.setZoom(14);
+        //infowindows[this.infoWindowIndex].open(map, this);
+        infowindowsArray[this.infoWindowIndex].open(map, this);
+    });
+    infowindowsArray.push(currentInfoWindow);
+       
+       /*   PREVIOUS VERSION OF ADD LISTENER
         aWildMarker.addListener('click', function() {
             //event listener
-            infoWindow.open(map, aWildMarker);
-        });
+            currentInfoWindow.open(map, aWildMarker);
+        });*/
+
 };//end loop for each marker
 
     } //end initMap
