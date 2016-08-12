@@ -82,7 +82,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
             infoWindowIndex: i
         });
 
-        var innerContent = theCurrentCreatorText + theCurrentTitleText + theCurrentTimeText;
+        var innerContent = "<h5> Marker Created By: " + theCurrentCreatorText + "</h5><br><h5>Message: " + theCurrentTitleText + "</h5><br><h5>Created At: " + theCurrentTimeText + "</h5>";
 
         var currentInfoWindow = new google.maps.InfoWindow({
             //info window does not open automatically. requires event listener.
