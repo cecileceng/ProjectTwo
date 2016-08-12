@@ -17,7 +17,7 @@ var io = require('socket.io')(http);
 var parseurl = require('parseurl');
 pry = require('pryjs');
 
-debugger;
+var sequelize = new Sequelize('mysql://vqr7tqxr8ba5rxd1:dbw35kmojsfrn4jz@gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/iybeq6p9pz3ehlaq');
 
 //passport stuff
 var passport = require('passport');
@@ -33,7 +33,7 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport-github strategt
+//passport-github strategy
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
@@ -149,19 +149,21 @@ app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }));
+  passport.authenticate('local', { failureRedirect: '/login' }));
 
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+// app.get('/auth/github/callback',
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   }));
+
+
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
