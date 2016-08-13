@@ -76,11 +76,10 @@ passport.deserializeUser(function(obj, done) {
       // console.log(user.login);
       var profile = user._json;
       console.log(profile);
-      var options = {where: [{githubID: user.id}, {name: profile.name}],
-      // var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
-      defaults: { name: user.name,
-                email: user.email,
-                userName: user.login }}
+      var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
+      defaults: { name: profile.name,
+                email: profile.email,
+                userName: profile.login }}
       models.Users.findOrCreate(options)
       .spread(function(user, created){
         var err = undefined;
