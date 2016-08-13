@@ -7,7 +7,7 @@ const querystring = require('querystring');
 var path = require('path');
 var exphbs = require('express-handlebars');
 //var session = require('express-session');
-var Sequelize = require('sequelize');
+//var Sequelize = require('sequelize');
 var session = require('express-session');
 var request = require('request');
 var models = require('./models');
@@ -31,7 +31,7 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport-github strategt
+//passport-github strategy
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
@@ -66,7 +66,6 @@ app.get('/auth/github/callback',
 // ));
 
 var partials = require('express-partials');
-
 // Passport session setup SERIALIZE/DESERIALIZE
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -82,27 +81,58 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-//passport-github2 CONFIGURE STRATEGY
-passport.use(new GitHubStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+  passport.use(new GitHubStrategy({
+    clientID: process.env.CLIENT_ID || 'mykeys',
+    clientSecret: process.env.CLIENT_SECRET || 'mykeys',
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
-    //RETURN USER FIND OR CREATE HERE
-  // .spread(function(user, created) {
-  //   console.log(user.get({
-  //     plain: true
-  //   }))
-  //   console.log(created)
-  var options = {where: { githubId: profile.id },
-      defaults: { name: profile.name,
-                  email: profile.email,
-                  userName: profile.login }};
-  models.Users.findOrCreate(options)
-.spread(function(user, created) {
-return done(err, user);
-})
+    function(accessToken, refreshToken, user, done){
+      // var js = JSON.parse(user);
+      // console.log(js.name);
+      console.log(user);
+      console.log(user.displayName);
+      // console.log(user.email);
+      // console.log(user.login);
+      var profile = user._json;
+      console.log(profile);
+      var options = {where: [{githubID: user.id}, {name: profile.name}],
+      // var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
+      defaults: { name: user.name,
+                email: user.email,
+                userName: profile }}
+      models.Users.findOrCreate(options)
+      .spread(function(user, created){
+        var err = undefined;
+        return done(err, user);
+      });
+    }
+  ));
+
+  // var options = {where: {githubID: profile.githubID},
+  //     defaults: profile};
+
+// //passport-github2 CONFIGURE STRATEGY
+// passport.use(new GitHubStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   }),
+//   function(accessToken, refreshToken, profile, done) {
+//     //RETURN USER FIND OR CREATE HERE
+//   // .spread(function(user, created) {
+//   //   console.log(user.get({
+//   //     plain: true
+//   //   }))
+//   //   console.log(created)
+//   var options = {where: { githubId: profile.id },
+//       defaults: { name: profile.name,
+//                   email: profile.email,
+//                   userName: profile.login }};
+//   models.Users.findOrCreate(options)
+// .spread(function(user, created) {
+// return done(err, user);
+// })
+// }
   // } name: DataTypes.STRING,
   //   email: DataTypes.STRING,
   //   githubID: DataTypes.STRING,
@@ -130,19 +160,21 @@ app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }));
+  passport.authenticate('local', { failureRedirect: '/login' }));
 
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+// app.get('/auth/github/callback',
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   }));
+
+
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
