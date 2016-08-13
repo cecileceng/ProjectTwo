@@ -76,7 +76,7 @@ passport.deserializeUser(function(obj, done) {
       // console.log(user.login);
       var profile = user._json;
       console.log(profile);
-      var options = {where: [{githubID: profile.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
+      var options = {where: [{githubID: user.id}, {name: profile.name}, {email: profile.email}, {userName: profile.login}],
       defaults: { name: profile.name,
                 email: profile.email,
                 userName: profile.login }}
