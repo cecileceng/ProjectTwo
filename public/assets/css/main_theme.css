@@ -9,7 +9,7 @@ html,body{
 /* Navigation styling */
 #navigation{
 	 position: absolute;
-	 z-index: 5;
+	 z-index: 2;
 	 font-family: 'Roboto','sans-serif';
 }
 
