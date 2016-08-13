@@ -74,7 +74,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	var locationObjectForMarker = { lat: theCurrentLatText, lng: theCurrentLngText };
 
 	//new instance of google marker
-	var image = ../public/assets/img/marker.png
+	var image = "../public/assets/img/marker.png"
 	var aWildMarker = new google.maps.Marker({
             position: locationObjectForMarker,
             map: map, //targets var map, which tells program which map to add marker to.
