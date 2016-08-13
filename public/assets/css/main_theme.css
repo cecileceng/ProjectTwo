@@ -18,7 +18,8 @@ h2 {
 	display: inline;
 }
 
-.sidenav-overlay{opacity: 0;}
+#sidenav-overlay{left: 240px;}
+
 /*  google map styles  */
 .main_container{
 	position:absolute;
