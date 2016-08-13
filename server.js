@@ -60,7 +60,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-/*
+
 //passport-github2 CONFIGURE STRATEGY
   passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
@@ -88,7 +88,7 @@ passport.deserializeUser(function(obj, done) {
       });
     }
   ));
-  */
+
 
 // configure Express
 app.set('views', __dirname + '/views');
