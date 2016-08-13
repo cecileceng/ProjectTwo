@@ -17,6 +17,8 @@ html,body{
 h2 {
 	display: inline;
 }
+
+.sidenav-overlay{opacity: 0;}
 /*  google map styles  */
 .main_container{
 	position:absolute;
