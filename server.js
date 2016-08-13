@@ -22,7 +22,8 @@ var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github2').Strategy;
 
-const keys = require('./tokens.js');
+//const keys = require('./tokens.js');
+
 
 app.use(require('serve-static')(__dirname + '/../../public'));
 //app.use(require('cookie-parser')());
@@ -42,30 +43,8 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
-// Use the GitHubStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and GitHub
-//   profile), and invoke a callback with a user object.
-//
-//passport.use(new GitHubStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     // asynchronous verification, for effect...
-//     process.nextTick(function () {
-
-//       // To keep the example simple, the user's GitHub profile is returned to
-//       // represent the logged-in user.  In a typical application, you would want
-//       // to associate the GitHub account with a user record in your database,
-//       // and return that user instead.
-//       return done(null, profile);
-//     });
-//   }
-// ));
-
 var partials = require('express-partials');
+
 // Passport session setup SERIALIZE/DESERIALIZE
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -81,6 +60,8 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+
+//passport-github2 CONFIGURE STRATEGY
   passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
@@ -108,36 +89,6 @@ passport.deserializeUser(function(obj, done) {
     }
   ));
 
-// //passport-github2 CONFIGURE STRATEGY
-// passport.use(new GitHubStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-//   }),
-//   function(accessToken, refreshToken, profile, done) {
-//     //RETURN USER FIND OR CREATE HERE
-//   // .spread(function(user, created) {
-//   //   console.log(user.get({
-//   //     plain: true
-//   //   }))
-//   //   console.log(created)
-//   var options = {where: { githubId: profile.id },
-//       defaults: { name: profile.name,
-//                   email: profile.email,
-//                   userName: profile.login }};
-//   models.Users.findOrCreate(options)
-// .spread(function(user, created) {
-// return done(err, user);
-// })
-// }
-  // } name: DataTypes.STRING,
-  //   email: DataTypes.STRING,
-  //   githubID: DataTypes.STRING,
-  //   languages: DataTypes.STRING,
-  //   rating: DataTypes.INTEGER,
-  //   userName: DataTypes.STRING,
-
-
 // configure Express
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -156,8 +107,14 @@ app.use(passport.session());
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }));
+
+app.post('/login', 
+  passport.authenticate('github', { failureRedirect: '/login' }));
+  // function(req, res) {
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/');
+  // });
+
 
 app.get('/logout', function(req, res){
   req.logout();

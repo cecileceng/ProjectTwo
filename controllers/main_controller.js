@@ -12,9 +12,13 @@ var pry = require('pryjs');
 router.get('/', function(req, res) {
     res.redirect('/home');
 });
-
+//home route, load markers from database, render index file
 router.get('/home', function(req, res) {
-    res.render('index');
+    models.Markers.findAll().then(function(data){
+        //bodyParser.json(data.dataValues);
+        //console.log(data);
+        res.render('index',{theGoogleMarkers:data});
+    });
 });
 
 router.get('/marker',function(req,res){
