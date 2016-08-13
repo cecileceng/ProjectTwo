@@ -86,10 +86,10 @@ for(i=0; i<totalNumberOfMarkers; i++){
  	 };
  	//pin shadow
  	 var shadow = new google.maps.MarkerImage(
-	'http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png',
-	new google.maps.Size(59, 32),	// size
-	new google.maps.Point(0,0),	// origin
-	new google.maps.Point(16, 32)	// anchor
+		"http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png",
+		new google.maps.Size(59, 32),	// size
+		new google.maps.Point(0,0),	// origin
+		new google.maps.Point(16, 32)	// anchor
 );
 
  	 //drop pfunction
