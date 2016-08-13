@@ -94,7 +94,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	var aWildMarker = new google.maps.Marker({
 			icon: image,
 			shadow: shadow,
-			animation: google.maps.Animation.DROP
+			animation: google.maps.Animation.DROP,
             position: locationObjectForMarker,
             map: map, //targets var map, which tells program which map to add marker to.
             title: theCurrentTitleText, //appears if you hover over marker
