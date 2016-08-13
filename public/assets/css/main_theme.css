@@ -11,6 +11,7 @@ html,body{
 	 position: absolute;
 	 z-index: 2;
 	 font-family: 'Roboto','sans-serif';
+	 width: 80%;
 }
 
 h2 {
