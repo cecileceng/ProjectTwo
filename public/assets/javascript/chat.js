@@ -6,7 +6,7 @@ $('form').submit(function() {
 });
 
 //stored as variable, hopefully we can polulate whit varialbe from localstorage with code from github username
-var tempUsername = "SNARF";
+var tempUsername = "UT Coding Bootcamp";
 var tempUserMessage = tempUsername + " says: ";
 
 //function for child length function of message UL.
