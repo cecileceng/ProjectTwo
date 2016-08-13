@@ -75,7 +75,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	var locationObjectForMarker = { lat: theCurrentLatText, lng: theCurrentLngText };
 
 	//Google Marker Image
-	  var image = {
+/*	  var image = {
 	    url: "/assets/img/marker.png",
 	    // This marker is 20 pixels wide by 32 pixels high.
 	    size: new google.maps.Size(20, 32),
@@ -84,7 +84,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	    // The anchor for this image is the base of the point at (0, 32).
 	    anchor: new google.maps.Point(0, 32)
  	 };
- 	/*//pin shadow
+ 	//pin shadow
  	 var shadow = new google.maps.MarkerImage(
 		"http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png",
 		new google.maps.Size(59, 32),	// size
@@ -95,7 +95,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	//new instance of google marker
 	var aWildMarker = new google.maps.Marker({
 			icon: "/assets/img/marker-small.png",
-			//shadow: shadow,
+			shadow: shadow,
 			animation: google.maps.Animation.DROP,
             position: locationObjectForMarker,
             map: map, //targets var map, which tells program which map to add marker to.
