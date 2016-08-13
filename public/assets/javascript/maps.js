@@ -125,7 +125,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
     });
     infowindowsArray.push(currentInfoWindow);
 
-google.maps.event.addDomListener(window, 'load', initialize);
+
        /*   PREVIOUS VERSION OF ADD LISTENER
         aWildMarker.addListener('click', function() {
             //event listener
