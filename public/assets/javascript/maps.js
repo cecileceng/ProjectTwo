@@ -75,7 +75,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 
 	//new instance of google marker
 	var aWildMarker = new google.maps.Marker({
-			icon: "../public/assets/img/marker.png",
+			icon: "marker.png",
             position: locationObjectForMarker,
             map: map, //targets var map, which tells program which map to add marker to.
             title: theCurrentTitleText, //appears if you hover over marker
