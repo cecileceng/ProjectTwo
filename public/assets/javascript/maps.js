@@ -1,6 +1,7 @@
  	var map;
     //var userLocation;
 
+
     function initMap() {
         //constructor creates new map. only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
@@ -83,13 +84,20 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	    // The anchor for this image is the base of the point at (0, 32).
 	    anchor: new google.maps.Point(0, 32)
  	 };
- 	 //pin shadow
+ 	//pin shadow
  	 var shadow = new google.maps.MarkerImage(
 	'http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png',
 	new google.maps.Size(59, 32),	// size
 	new google.maps.Point(0,0),	// origin
 	new google.maps.Point(16, 32)	// anchor
 );
+
+ 	 //drop pfunction
+ 	   function drop() {
+        for (var i = 0; i < children.length; i++) {
+          addMarkerWithTimeout(children[i], i * 200);
+        }
+      }
 	//new instance of google marker
 	var aWildMarker = new google.maps.Marker({
 			icon: image,
