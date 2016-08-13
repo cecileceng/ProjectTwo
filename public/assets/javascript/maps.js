@@ -25,7 +25,7 @@
         });*/
 
 
-//fetch master marker div    
+//fetch master marker div
 var infoInfoInfo = $('#masterMarkerDiv');
 //total number of markers
 var totalNumberOfMarkers = infoInfoInfo[0].children.length;
@@ -74,8 +74,9 @@ for(i=0; i<totalNumberOfMarkers; i++){
 	var locationObjectForMarker = { lat: theCurrentLatText, lng: theCurrentLngText };
 
 	//new instance of google marker
+	var image = ../public/assets/img/marker.png
 	var aWildMarker = new google.maps.Marker({
-            position: locationObjectForMarker, 
+            position: locationObjectForMarker,
             map: map, //targets var map, which tells program which map to add marker to.
             title: theCurrentTitleText, //appears if you hover over marker
             //infoWindow: currentInfoWindow,
@@ -96,7 +97,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
         infowindowsArray[this.infoWindowIndex].open(map, this);
     });
     infowindowsArray.push(currentInfoWindow);
-       
+
        /*   PREVIOUS VERSION OF ADD LISTENER
         aWildMarker.addListener('click', function() {
             //event listener
