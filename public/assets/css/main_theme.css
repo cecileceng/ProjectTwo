@@ -5,6 +5,13 @@ html,body{
 	margin: 0;
 	overflow: hidden;
 }
+
+/* Navigation styling */
+#navigation{
+	 position: absolute;
+	 z-index: 5;
+	 font-family: 'Roboto','sans-serif';
+}
 /*  google map styles  */
 .main_container{
 	position:absolute;
