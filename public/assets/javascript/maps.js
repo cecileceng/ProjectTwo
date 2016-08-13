@@ -94,7 +94,7 @@ for(i=0; i<totalNumberOfMarkers; i++){
 
 	//new instance of google marker
 	var aWildMarker = new google.maps.Marker({
-			icon: image,
+			icon: "/assets/img/marker-small.png",
 			//shadow: shadow,
 			animation: google.maps.Animation.DROP,
             position: locationObjectForMarker,
