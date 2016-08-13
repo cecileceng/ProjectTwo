@@ -18,7 +18,7 @@ function removeOldListItem() {
     	var list = document.getElementById("messages");
     	//remove child 0, then what was index 1 becomes index 0, and we remove that too. Leave both.
     	list.removeChild(list.childNodes[0]);
-    	list.removeChild(list.childNodes[0]);
+    	// list.removeChild(list.childNodes[0]);
     }
     console.log(messageChild);
 }
@@ -26,6 +26,6 @@ function removeOldListItem() {
 //chat function. append new message to messages ul element
 socket.on('chat message', function(msg) {
 	removeOldListItem();
-	$('#messages').append($('<li>').text(tempUserMessage));
+	// $('#messages').append($('<li>').text(tempUserMessage));
     $('#messages').append($('<li>').text(msg));
 });
