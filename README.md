@@ -1,7 +1,7 @@
 
 # GIT Some : coding buddies near you.
 
-[![Git Some Video Demo](gitsome-demo.png)](https://www.youtube.com/watch?v=HkDS6Bdky6s)]
+[![Git Some Video Demo](gitsome-demo.png)](https://www.youtube.com/watch?v=HkDS6Bdky6s)
 
 ##LATEST NEWS
 
